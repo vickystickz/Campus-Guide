@@ -6,7 +6,7 @@ type APP_CONFIG_TYPE = {
 
 const APP_CONFIG: APP_CONFIG_TYPE = {
     projectStatus: "In Progress",
-    percentage: 10,
+    percentage: 1,
 }
 
 
