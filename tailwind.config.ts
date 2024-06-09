@@ -21,13 +21,31 @@ const config: Config = {
         "2xl": "1536px",
       },
       fontSize: {
-        ph1: ["var(--font-size-primary-h1)", "var(--line-height-primary-h1)"],
-        ph2: ["var(--font-size-primary-h2)", "var(--line-height-primary-h2)"],
-        sh1: ["var(--font-size-secondary-h1)", "var(--line-height-secondary-h1)"],
-        sh2: ["var(--font-size-secondary-h2)", "var(--line-height-secondary-h2)"],
-      },
+          // Primary typography
+          "p-4xl": ["var(--font-size-primary-h1)", "var(--line-height-primary-h1)"],
+          "p-3xl": ["var(--font-size-primary-h2)", "var(--line-height-primary-h2)"],
+          "p-2xl": ["var(--font-size-primary-h3)", "var(--line-height-primary-h3)"],
+          "p-xl": ["var(--font-size-primary-h4)", "var(--line-height-primary-h4)"],
+          "p-lg": ["var(--font-size-primary-h5)", "var(--line-height-primary-h5)"],
+          "p-md": ["var(--font-size-primary-p1)", "var(--line-height-primary-h1)"],
+          "p-base": ["var(--font-size-primary-p2)", "var(--line-height-primary-h2)"],
+          "p-xs": ["var(--font-size-primary-p3)", "var(--line-height-primary-h3)"],
+          "p-sm": ["var(--font-size-primary-h4)", "var(--line-height-primary-h4)"], 
+          
+          // Secondary typography
+          "s-4xl": ["var(--font-size-secondary-h1)", "var(--line-height-secondary-h1)"],
+          "s-3xl": ["var(--font-size-secondary-h2)", "var(--line-height-secondary-h2)"],
+          "s-2xl": ["var(--font-size-secondary-h3)", "var(--line-height-secondary-h3)"],
+          "s-xl": ["var(--font-size-secondary-h4)", "var(--line-height-secondary-h4)"],
+          "s-lg": ["var(--font-size-secondary-h5)", "var(--line-height-secondary-h5)"],
+          "s-md": ["var(--font-size-secondary-p1)", "var(--line-height-secondary-p1)"],
+          "s-base": ["var(--font-size-secondary-p2)", "var(--line-height-secondary-p2)"],
+          "s-xs": ["var(--font-size-secondary-p3)", "var(--line-height-secondary-p3)"],
+          "s-sm": ["var(--font-size-secondary-p4)", "var(--line-height-secondary-p4)"],
+
+        },
       colors: {
-        B: {
+        blue: {
           50: "var(--cg-blue-50)",
           75: "var(--cg-blue-75)",
           100: "var(--cg-blue-100)",
@@ -36,7 +54,7 @@ const config: Config = {
           400: "var(--cg-blue-400)",
           500: "var(--cg-blue-500)",
         },
-        P: {
+        purple: {
           50: "var(--cg-purple-50)",
           75: "var(--cg-purple-75)",
           100: "var(--cg-purple-100)",
@@ -45,7 +63,7 @@ const config: Config = {
           400: "var(--cg-purple-400)",
           500: "var(--cg-purple-500)",
         },
-        Y: {
+        yellow: {
           50: "var(--cg-yellow-50)",
           75: "var(--cg-yellow-75)",
           100: "var(--cg-yellow-100)",
