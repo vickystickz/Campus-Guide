@@ -36,49 +36,46 @@
   --cg-error: #ff4343;
   --cg-warning: #eeee27;
 
-  --font-size-primary-h1: calc(8rem + (9 - 7) * ((100vw - 280px) / (1920 - 280)));
-  --font-size-primary-h2: calc(5.625rem + (4 - 7) * ((100vw - 280px) / (1920 - 280)));
-
-  /* --font-size-primary-h3: calc(rem + (17 - 15) * ((100vw - 280px) / (1920 - 280)));
-  --font-size-primary-h4: calc(rem + (17 - 15) * ((100vw - 280px) / (1920 - 280)));
-  --font-size-primary-h5: calc(rem + (17 - 15) * ((100vw - 280px) / (1920 - 280)));
-  --font-size-primary-p1: calc(1.125rem + (19 - 17) * ((100vw - 280px) / (1920 - 280)));
-  --font-size-primary-p2: calc(1.25rem + (21 - 19) * ((100vw - 280px) / (1920 - 280)));
-  --font-size-primary-p3: calc(1.5rem + (25 - 23) * ((100vw - 280px) / (1920 - 280)));
-  --font-size-primary-p4: calc(1.875rem + (31 - 29) * ((100vw - 280px) / (1920 - 280))); */
+  --font-size-primary-h1: 8rem;
+  --font-size-primary-h2: 5.62rem;
+  --font-size-primary-h3: 4rem;
+  --font-size-primary-h4: 2.81rem;
+  --font-size-primary-h5: 2rem;
+  --font-size-primary-p1: 1.438rem;
+  --font-size-primary-p2: 1rem;
+  --font-size-primary-p3: 0.75rem;
+  --font-size-primary-p4: 0.5rem;
 
   --line-height-primary-h1: 9.38rem;
-  --line-height-primary-h2: 9.4rem;
-
-  --line-height-primary-h3: 1.5em;
-  --line-height-primary-h4: 1.5em;
-  --line-height-primary-h5: 1.5em;
-  --line-height-primary-p1: 1.5em;
+  --line-height-primary-h2: 6.598rem;
+  --line-height-primary-h3: 4.69rem;
+  --line-height-primary-h4: 3.29rem;
+  --line-height-primary-h5: 2.5rem;
+  --line-height-primary-p1: 1.68rem;
   --line-height-primary-p2: 1.5em;
-  --line-height-primary-p3: 1.333em;
-  --line-height-primary-p4: 1.3em;
+  --line-height-primary-p3: 0.88rem;
+  --line-height-primary-p4: 0.58em;
 
-  --font-size-secondary-h1: 6rem;
-  --font-size-secondary-h2: 4rem;
 
-  /* --font-size-secondary-h3: calc(rem + (17 - 15) * ((100vw - 280px) / (1920 - 280)));
-  --font-size-secondary-h4: calc(rem + (17 - 15) * ((100vw - 280px) / (1920 - 280)));
-  --font-size-secondary-h5: calc(rem + (17 - 15) * ((100vw - 280px) / (1920 - 280)));
-  --font-size-secondary-p1: calc(1.125rem + (19 - 17) * ((100vw - 280px) / (1920 - 280)));
-  --font-size-secondary-p2: calc(1.25rem + (21 - 19) * ((100vw - 280px) / (1920 - 280)));
-  --font-size-secondary-p3: calc(1.5rem + (25 - 23) * ((100vw - 280px) / (1920 - 280)));
-  --font-size-secondary-p4: calc(1.875rem + (31 - 29) * ((100vw - 280px) / (1920 - 280))); */
+  --font-size-secondary-h1: 5.9375rem;
+  --font-size-secondary-h2: 6.33rem;
+  --font-size-secondary-h3: 3.81rem;
+  --font-size-secondary-h4: 4.08rem;
+  --font-size-secondary-h5: 2.43rem;
+  --font-size-secondary-p1: 1.9375rem;
+  --font-size-secondary-p2: 1.5625rem; 
+  --font-size-secondary-p3: 1.25rem; 
+  --font-size-secondary-p4: 1rem; 
 
   --line-height-secondary-h1: 7.48rem;
-  --line-height-secondary-h2: 5.985rem;
-
-  /* --line-height-secondary-h3: 1.5em;
-  --line-height-secondary-h4: 1.5em;
-  --line-height-secondary-h5: 1.5em;
-  --line-height-secondary-p1: 1.5em;
-  --line-height-secondary-p2: 1.5em;
-  --line-height-secondary-p3: 1.333em;
-  --line-height-secondary-p4: 1.3em; */
+  --line-height-secondary-h2: 6.0468rem;
+  --line-height-secondary-h3: 4.80rem;
+  --line-height-secondary-h4: 3.86em;
+  --line-height-secondary-h5: 2.44em;
+  --line-height-secondary-p1: 1.9375rem;
+  --line-height-secondary-p2: 1.5625em;
+  --line-height-secondary-p3: 1.575em;
+  --line-height-secondary-p4: 1.68rem;
 }
 
 @media (prefers-color-scheme: dark) {

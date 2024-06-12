@@ -27,10 +27,10 @@ const config: Config = {
           "p-2xl": ["var(--font-size-primary-h3)", "var(--line-height-primary-h3)"],
           "p-xl": ["var(--font-size-primary-h4)", "var(--line-height-primary-h4)"],
           "p-lg": ["var(--font-size-primary-h5)", "var(--line-height-primary-h5)"],
-          "p-md": ["var(--font-size-primary-p1)", "var(--line-height-primary-h1)"],
-          "p-base": ["var(--font-size-primary-p2)", "var(--line-height-primary-h2)"],
-          "p-xs": ["var(--font-size-primary-p3)", "var(--line-height-primary-h3)"],
-          "p-sm": ["var(--font-size-primary-h4)", "var(--line-height-primary-h4)"], 
+          "p-md": ["var(--font-size-primary-p1)", "var(--line-height-primary-p1)"],
+          "p-base": ["var(--font-size-primary-p2)", "var(--line-height-primary-p2)"],
+          "p-xs": ["var(--font-size-primary-p3)", "var(--line-height-primary-p3)"],
+          "p-sm": ["var(--font-size-primary-p4)", "var(--line-height-primary-p4)"], 
           
           // Secondary typography
           "s-4xl": ["var(--font-size-secondary-h1)", "var(--line-height-secondary-h1)"],
@@ -80,6 +80,7 @@ const config: Config = {
         },
       },
       backgroundImage: {
+        'progress-cover-image': 'url("/bg-cover.svg")',
       },
     },
   },
