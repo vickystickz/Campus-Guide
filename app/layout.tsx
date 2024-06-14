@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { work_sans, sora } from "@/app/font";
+import { Theme } from '@radix-ui/themes';
 import "./globals.css";
 
 
@@ -15,8 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`h-screen ${work_sans.variable} ${sora.variable}`}>
-        {children}</body>
+      <body className={`${work_sans.variable} ${sora.variable}`}>
+        <Theme>
+          <div className="h-screen min-w-screen">
+          {children}
+          </div>
+        </Theme>
+       </body>
     </html>
   );
 }

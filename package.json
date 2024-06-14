@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.4.1",
+    "@radix-ui/themes": "^3.0.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.2.10",
