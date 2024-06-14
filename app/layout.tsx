@@ -15,7 +15,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${work_sans.variable} ${sora.variable}`}>{children}</body>
+      <body className={`h-screen ${work_sans.variable} ${sora.variable}`}>
+        {children}</body>
     </html>
   );
 }

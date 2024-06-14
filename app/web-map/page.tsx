@@ -1,7 +1,7 @@
 "use client";
 
 import PageLoader from "@/component/shared/Pageloader";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const WebMap = () => {
   const [showMap, setShowMap] = useState(false);
@@ -13,6 +13,7 @@ const WebMap = () => {
       ) : (
         <div className="flex h-full w-full flex-col gap-12 items-center justify-center">
           <PageLoader
+            showLogo
             onLoaded={() => {
               setShowMap(true);
             }}
