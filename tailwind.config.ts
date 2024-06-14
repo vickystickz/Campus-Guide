@@ -3,7 +3,7 @@ import type { Config } from "tailwindcss";
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./component/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
@@ -73,7 +73,7 @@ const config: Config = {
           500: "var(--cg-yellow-500)",
         },
         cg: {
-          error: "var(--cg-error)",
+          error: "var(--cg-error)", 
           success: "var(--cg-success)",
           warning: "var(--cg-warning)",
           info: "var(--cg-info)",
