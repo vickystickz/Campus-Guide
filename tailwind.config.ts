@@ -77,6 +77,7 @@ const config: Config = {
           success: "var(--cg-success)",
           warning: "var(--cg-warning)",
           info: "var(--cg-info)",
+          white: "var(--cg-white)"
         },
       },
       backgroundImage: {
