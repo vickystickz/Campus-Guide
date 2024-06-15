@@ -11,7 +11,7 @@ type APP_CONFIG_TYPE = {
 
 const APP_CONFIG: APP_CONFIG_TYPE = {
     projectStatus: "In Progress",
-    percentage: 1,
+    percentage: 20.5,
 
     CUSTOM_ATTRIBUTION: "Development by YouthMappers Dev. led by Victor Ademoyero",
     MAP_CONFIG: {
