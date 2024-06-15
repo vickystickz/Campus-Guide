@@ -4,6 +4,7 @@ import ZoomOut from "@/assets/icons/ZoomOut";
 import ZoomIn from "@/assets/icons/ZoomIn";
 import Route from "@/assets/icons/Route";
 import StartMarker from "@/assets/icons/StartMarker";
+import Love from "@/assets/icons/Love";
 
 // expots Icons for App Use 
 export {
@@ -12,5 +13,6 @@ export {
     ZoomOut as ZoomOutIcon,
     ZoomIn as ZoomInIcon,
     Route as RouteIcon,
-    StartMarker as StartMarkerIcon
+    StartMarker as StartMarkerIcon,
+    Love as LoveIcon
 }

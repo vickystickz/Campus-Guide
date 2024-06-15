@@ -8,7 +8,7 @@ import APP_CONFIG from "@/constant/config";
 
 const MapCanvas = () => {
   const mapContainer = useRef(null);
-  const { CUSTOM_ATTRIBUTION} = APP_CONFIG
+  const { CUSTOM_ATTRIBUTION } = APP_CONFIG
 
   const {
     baseMap,
