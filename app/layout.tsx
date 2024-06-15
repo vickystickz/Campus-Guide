@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { work_sans, sora } from "@/app/font";
-import { Theme } from '@radix-ui/themes';
+import { Providers } from "@/lib/context/Providers";
 import "./globals.css";
-
+import "mapbox-gl/dist/mapbox-gl.css";
 
 export const metadata: Metadata = {
   title: "Campus Guide",
-  description: "A platform that provides easy navigation within Univerisity Campus for students and visitors.",
+  description:
+    "A platform that provides easy navigation within Univerisity Campus for students and visitors.",
 };
 
 export default function RootLayout({
@@ -17,12 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${work_sans.variable} ${sora.variable}`}>
-        <Theme>
-          <div className="h-screen min-w-screen">
-          {children}
-          </div>
-        </Theme>
-       </body>
+        <Providers>
+          <div className="h-screen min-w-screen">{children} </div>
+        </Providers>
+      </body>
     </html>
   );
 }
