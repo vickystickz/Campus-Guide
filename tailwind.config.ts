@@ -83,6 +83,9 @@ const config: Config = {
       backgroundImage: {
         'progress-cover-image': 'url("/bg-cover.svg")',
       },
+      boxShadow: {
+          icon: "0px 0px 16px 0px #18002C1A"
+      }
     },
   },
   plugins: [],
