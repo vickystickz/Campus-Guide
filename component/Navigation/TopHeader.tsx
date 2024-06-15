@@ -5,7 +5,7 @@ import CG from "@/assets/icons/CG";
 
 const TopHeader = () => {
   return (
-    <div className="absolute top-6 lg:px-8 md:px-4 px-2 w-full flex items-center justify-between">
+    <div className="absolute top-6 lg:px-8 md:px-4 px-4 w-full flex items-center justify-between">
       <div>
         <Button
             href="/"
