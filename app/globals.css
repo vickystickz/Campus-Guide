@@ -105,6 +105,8 @@ body,
   font-size: 16px;
   min-width: 100vw;
   height: 100vh;
+  padding: 0;
+  margin: 0;
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
@@ -117,5 +119,14 @@ body,
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@layer components{
+  .map-control-icon{
+    @apply md:h-fit md:w-fit h-[1.14rem] w-[1.14rem]
+  }
+  .btn{
+    @apply md:py-4 md:px-6 py-2.5 px-4 rounded-full ;
   }
 }
