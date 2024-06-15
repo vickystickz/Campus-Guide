@@ -124,7 +124,7 @@ body,
 
 @layer components{
   .map-control-icon{
-    @apply md:h-fit md:w-fit h-[1.14rem] w-[1.14rem]
+    @apply h-fit  w-fit;
   }
   .btn{
     @apply md:py-4 md:px-6 py-2.5 px-4 rounded-full ;

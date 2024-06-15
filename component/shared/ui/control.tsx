@@ -12,7 +12,7 @@ const MapControlWrapper = ({ children, style, onClick, activateControl }: MapCon
   return (
     <div
       className={cn(
-        "bg-white md:w-[3.5rem] md:h-[3.5rem] h-[2.53rem] w-[2.53rem] hover:text-cg-white hover:bg-blue-200 transition-all delay-150 duration-150 ease-in-out text-blue-200 rounded-full flex items-center justify-center cursor-pointer",
+        "bg-white shadow-icon w-[3.5rem] h-[3.5rem] hover:text-cg-white hover:bg-blue-200 transition-all delay-150 duration-150 ease-in-out text-blue-200 rounded-full flex items-center justify-center cursor-pointer",
         style,
         activateControl && "bg-blue-200 text-cg-white"
       )}
