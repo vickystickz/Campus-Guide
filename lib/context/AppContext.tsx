@@ -63,7 +63,7 @@ import APP_CONFIG from "@/constant/config"
   export const useAppContext = () => {
     const context = useContext(AppContext);
     if (!context) {
-      throw new Error("useAppContext must be used within an AppPrWovider");
+      throw new Error("useAppContext must be used within an AppProvider");
     }
     return context;
   };
@@ -73,7 +73,7 @@ import APP_CONFIG from "@/constant/config"
   }
   
   const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
-    const [baseMap, setBaseMap] = useState<string>(APP_CONFIG.MAP_CONFIG.MAP_STYLE);
+    const [baseMap, setBaseMap] = useState<string>(APP_CONFIG.MAP_CONFIG.MAP_STYLE.DEFAULT);
     const [showMap, setShowMap] = useState<boolean>(false);
     const [mapLoaded, setMapLoaded] = useState<boolean>(false);
     const [interactiveLayerIds, setInteractiveLayerIds] = useState([])
