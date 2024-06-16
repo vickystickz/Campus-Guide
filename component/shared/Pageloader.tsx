@@ -22,7 +22,7 @@ const PageLoader = ({ showLogo, onLoaded }: PageLoaderProps) => {
       if (value === 100) {
         onLoaded();
       }
-    }, 500);
+    }, 200);
 
     return () => clearInterval(interval);
   }, [value, onLoaded]);
@@ -41,7 +41,7 @@ const PageLoader = ({ showLogo, onLoaded }: PageLoaderProps) => {
       )}
       <div className="block relative md:w-[20rem] w-[15rem] h-[0.5rem] bg-purple-50 rounded-full overflow-clip">
         <div
-          className="absolute top-0 bottom-0 rounded-md bg-purple-200 transition-all ease-in-out duration-200 delay-100"
+          className="absolute top-0 bottom-0 rounded-md bg-purple-200 transition-all ease-in-out duration-75 delay-150"
           style={{ width: `${value}%` }}
         ></div>
       </div>

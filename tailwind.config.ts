@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { toast } from "./lib/context/use-toast";
 
 const config: Config = {
   content: [
@@ -84,7 +85,9 @@ const config: Config = {
         'progress-cover-image': 'url("/bg-cover.svg")',
       },
       boxShadow: {
-          icon: "0px 0px 16px 0px #18002C1A"
+          icon: "0px 0px 16px 0px #18002C1A",
+          toast: "0px 0px 16px 0px #18002C1A",
+          tooltip: "0px 0px 16px 0px #18002C1A"
       }
     },
   },

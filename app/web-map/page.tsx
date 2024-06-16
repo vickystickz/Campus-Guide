@@ -15,7 +15,7 @@ const WebMap = () => {
   } = useAppContext()
 
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full font-work-sans">
       {showMap ? (
         <div className="h-full relative w-full">
           <MapCanvas />

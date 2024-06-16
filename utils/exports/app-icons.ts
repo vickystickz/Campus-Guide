@@ -5,8 +5,9 @@ import ZoomIn from "@/assets/icons/ZoomIn";
 import Route from "@/assets/icons/Route";
 import StartMarker from "@/assets/icons/StartMarker";
 import Love from "@/assets/icons/Love";
+import CloseToast from "@/assets/icons/CloseToast"
 
-// expots Icons for App Use 
+// exports Icons for App Use
 export {
     BaseMap as BaseMapIcon,
     GeoLocate as GeoLocateIcon,
@@ -14,5 +15,9 @@ export {
     ZoomIn as ZoomInIcon,
     Route as RouteIcon,
     StartMarker as StartMarkerIcon,
-    Love as LoveIcon
+    Love as LoveIcon,
+    CloseToast as CloseToastIcon
 }
+
+
+
