@@ -22,8 +22,15 @@ import APP_CONFIG from "@/constant/config"
         longitude: number,
         latitude: number,
         zoom:number,
-        pictch?: number,
-        bearing? :number
+        pitch?: number,
+        bearing? :number,
+        fitBoundsOptions?: {
+            padding: number
+            maxZoom: number
+            minZoom: number
+            offset: [number, number]
+        },
+        bounds?: [[number, number], [number, number]]
     }
     setViewState: Dispatch<SetStateAction< {
         longitude: number,
