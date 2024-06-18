@@ -2,7 +2,7 @@ import MapControlWrapper from "@/component/shared/ui/control";
 import { GeoLocateIcon } from "@/utils/exports/app-icons";
 import { useAppContext } from "@/lib/context/AppContext";
 import { useMap } from "react-map-gl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TooltipWrapper from "@/component/shared/ui/wrapper/TooltipWrapper";
 import APP_CONFIG from "@/constant/config";
 
@@ -45,7 +45,6 @@ const GeoLocateControl = () => {
       setActivate(false)
     }
   };
-
   
   return (
     <TooltipWrapper

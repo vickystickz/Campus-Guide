@@ -5,7 +5,7 @@ import ZoomControl from "./map-components/ZoomControl";
 
 const MapControl = () => {
   return (
-    <div className="absolute lg:right-8 md:right-4 right-4 bottom-1/4 space-y-8 ">
+    <div className="absolute lg:right-8 md:right-4 md:top-auto lg:top-auto right-4 md:bottom-1/4 top-32 space-y-8 ">
       <ZoomControl />
       <div className="space-y-4 flex flex-col ">
         <GeoLocateControl />

@@ -7,6 +7,8 @@ import StartMarker from "@/assets/icons/StartMarker";
 import Love from "@/assets/icons/Love";
 import CloseToast from "@/assets/icons/CloseToast";
 import EndMarker from "@/assets/icons/EndMarker";
+import EndRoute from "@/assets/icons/EndRoute";
+import StartRoute from "@/assets/icons/StartRoute";
 
 // exports Icons for App Use
 export {
@@ -18,7 +20,9 @@ export {
     StartMarker as StartMarkerIcon,
     Love as LoveIcon,
     CloseToast as CloseToastIcon,
-    EndMarker as EndMarkerIcon
+    EndMarker as EndMarkerIcon,
+    EndRoute as EndRouteIcon,
+    StartRoute as StartRouteIcon
 }
 
 

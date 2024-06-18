@@ -7,19 +7,6 @@ const Markers = () => {
   const { current: mymap } = useMap();
   const { startMarker, endMarker, setEndMarker, setStartMarker } = useAppContext();
 
-  // useEffect(() => {
-  //   if (startMarker) {
-  //     if (startMarker.latitude && startMarker.longitude) {
-  //       if (!mymap) return;
-  //       mymap.flyTo({
-  //         center: [startMarker.longitude, startMarker.latitude],
-  //         zoom: 14,
-  //       });
-  //     }
-  //   }
-  // }, [startMarker, mymap]);
-
-
 
   return (
     <div>
@@ -35,7 +22,6 @@ const Markers = () => {
               longitude: e.lngLat.lng,
               latitude: e.lngLat.lat
             })
-            console.log(e.lngLat)
           }} 
           onClick={() => {
             if (!mymap) return;
@@ -57,7 +43,6 @@ const Markers = () => {
               longitude: e.lngLat.lng,
               latitude: e.lngLat.lat
             })
-            console.log(e.lngLat)
           }} 
           longitude={endMarker.longitude}
           latitude={endMarker.latitude}

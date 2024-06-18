@@ -1,3 +1,4 @@
+import { LineLayer } from "mapbox-gl";
 
 type APP_CONFIG_TYPE = {
     projectStatus: string;
@@ -28,6 +29,10 @@ type APP_CONFIG_TYPE = {
             ZOOM_OUT: string;
             BASEMAP: string;
         }
+    },
+
+    Layer_CONFIG: {
+        LineStyle: LineLayer
     }
 }
 
@@ -64,7 +69,21 @@ const APP_CONFIG: APP_CONFIG_TYPE = {
             ZOOM_OUT: "Zoom Out",
             BASEMAP: "Change Basemap",
         }
-    } 
+    },
+
+    Layer_CONFIG: {
+        LineStyle:{
+            id: "route",
+            type: "line",
+            paint: {
+              "line-width": 3,
+              "line-color": "#992BF4",
+            },
+            layout: {
+              visibility: "visible", // the layer will always show by default when the map loads
+            },
+          }
+    }
 }
 
 
