@@ -7,12 +7,19 @@ import React, {
     ReactNode,
     Dispatch,
     SetStateAction,
+    useEffect,
   } from "react";
+  import type {FeatureCollection} from 'geojson';
 
 import APP_CONFIG from "@/constant/config"
+import { RouteType } from "@/types/route";
   
   interface AppContextProps {
     baseMap: string;
+    route: FeatureCollection;
+    setRoute: Dispatch<SetStateAction<FeatureCollection>>;
+    routeInfo:RouteType[] | null;
+    setRouteInfo:Dispatch<SetStateAction<RouteType[] | null>>;
     setBaseMap: Dispatch<SetStateAction<string>>;
     showMap: boolean;
     setShowMap: Dispatch<SetStateAction<boolean>>;
@@ -82,6 +89,21 @@ import APP_CONFIG from "@/constant/config"
   const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     const [baseMap, setBaseMap] = useState<string>(APP_CONFIG.MAP_CONFIG.MAP_STYLE.DEFAULT);
     const [showMap, setShowMap] = useState<boolean>(false);
+    const [route, setRoute] = useState<FeatureCollection>({
+        type: "FeatureCollection",
+        features: [
+          {
+            type: "Feature",
+            geometry: {
+              type: "LineString",
+              coordinates: [],
+            },
+            properties: null
+          },
+        ],
+      }
+    );
+    const [routeInfo, setRouteInfo] = useState<RouteType[] | null>(null)
     const [mapLoaded, setMapLoaded] = useState<boolean>(false);
     const [interactiveLayerIds, setInteractiveLayerIds] = useState([])
     const [viewState, setViewState] = useState({
@@ -102,6 +124,24 @@ import APP_CONFIG from "@/constant/config"
         latitude: number
     } | null>(null) 
 
+    
+  useEffect(()=>{
+    if(routeInfo){
+      setRoute({
+        type: "FeatureCollection",
+        features: [
+          {
+            type: "Feature",
+            geometry:routeInfo[0]?.geometry,
+            properties: null
+          },
+        ],
+      })
+    }
+  },[routeInfo, setRoute])
+
+
+
 
     const value = useMemo(
       () => ({
@@ -120,9 +160,13 @@ import APP_CONFIG from "@/constant/config"
         endMarker,
         setEndMarker,
         mapLoaded,
-        setMapLoaded
+        setMapLoaded,
+        route,
+        setRoute,
+        routeInfo,
+        setRouteInfo
       }),
-      [baseMap, endMarker, interactiveLayerIds, mapLoaded, progressMarker, showMap, startMarker, viewState]
+      [baseMap, endMarker, interactiveLayerIds, mapLoaded, progressMarker, route, routeInfo, showMap, startMarker, viewState]
     );
   
     return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

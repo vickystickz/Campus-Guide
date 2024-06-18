@@ -87,7 +87,8 @@ const config: Config = {
       boxShadow: {
           icon: "0px 0px 16px 0px #18002C1A",
           toast: "0px 0px 16px 0px #18002C1A",
-          tooltip: "0px 0px 16px 0px #18002C1A"
+          tooltip: "0px 0px 16px 0px #18002C1A",
+          modal: "0px 0px 24px 0px #18002C29"
       }
     },
   },

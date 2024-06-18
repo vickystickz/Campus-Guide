@@ -11,7 +11,7 @@ const CloseToast = (props: SVGProps<SVGSVGElement>) => (
   >
     <path
       d="M18.8322 6L6.83215 18M6.83215 6L18.8322 18"
-      stroke="black"
+      stroke="currentColor"
       strokeWidth={1.5}
       strokeLinecap="round"
       strokeLinejoin="round"
