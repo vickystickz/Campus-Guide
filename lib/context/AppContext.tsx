@@ -20,6 +20,8 @@ import { RouteType } from "@/types/route";
     setRoute: Dispatch<SetStateAction<FeatureCollection>>;
     routeInfo:RouteType[] | null;
     setRouteInfo:Dispatch<SetStateAction<RouteType[] | null>>;
+    routeProfile: "driving" | "walking" | "cycling";
+    setRouteProfile: Dispatch<SetStateAction<"driving" | "walking" | "cycling">>;
     setBaseMap: Dispatch<SetStateAction<string>>;
     showMap: boolean;
     setShowMap: Dispatch<SetStateAction<boolean>>;
@@ -103,6 +105,7 @@ import { RouteType } from "@/types/route";
         ],
       }
     );
+    const [routeProfile, setRouteProfile] = useState<"driving" | "walking" | "cycling">("driving");
     const [routeInfo, setRouteInfo] = useState<RouteType[] | null>(null)
     const [mapLoaded, setMapLoaded] = useState<boolean>(false);
     const [interactiveLayerIds, setInteractiveLayerIds] = useState([])
@@ -137,6 +140,20 @@ import { RouteType } from "@/types/route";
           },
         ],
       })
+    }else{
+      setRoute({
+        type: "FeatureCollection",
+        features: [
+          {
+            type: "Feature",
+            geometry: {
+              type: "LineString",
+              coordinates: [],
+            },
+            properties: null
+          },
+        ],
+      })
     }
   },[routeInfo, setRoute])
 
@@ -164,9 +181,11 @@ import { RouteType } from "@/types/route";
         route,
         setRoute,
         routeInfo,
-        setRouteInfo
+        setRouteInfo,
+        routeProfile,
+        setRouteProfile
       }),
-      [baseMap, endMarker, interactiveLayerIds, mapLoaded, progressMarker, route, routeInfo, showMap, startMarker, viewState]
+      [baseMap, endMarker, interactiveLayerIds, mapLoaded, progressMarker, route, routeInfo, routeProfile, showMap, startMarker, viewState]
     );
   
     return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
