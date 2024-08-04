@@ -9,7 +9,9 @@ import CloseToast from "@/assets/icons/CloseToast";
 import EndMarker from "@/assets/icons/EndMarker";
 import EndRoute from "@/assets/icons/EndRoute";
 import StartRoute from "@/assets/icons/StartRoute";
-
+import Car from "@/assets/icons/Car";
+import Walk from "@/assets/icons/Walk";
+import Direction from "@/assets/icons/Direction";
 // exports Icons for App Use
 export {
     BaseMap as BaseMapIcon,
@@ -22,7 +24,10 @@ export {
     CloseToast as CloseToastIcon,
     EndMarker as EndMarkerIcon,
     EndRoute as EndRouteIcon,
-    StartRoute as StartRouteIcon
+    StartRoute as StartRouteIcon,
+    Car as CarIcon,
+    Walk as WalkIcon,
+    Direction as StartNavigationIcon
 }
 
 

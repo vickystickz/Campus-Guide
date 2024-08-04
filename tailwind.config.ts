@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss";
-import { toast } from "./lib/context/use-toast";
 
 const config: Config = {
   content: [
