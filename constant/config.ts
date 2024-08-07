@@ -86,7 +86,7 @@ const APP_CONFIG: APP_CONFIG_TYPE = {
       id: "route",
       type: "line",
       paint: {
-        "line-width": 3,
+        "line-width": 6,
         "line-color": "#992BF4",
       },
       layout: {
