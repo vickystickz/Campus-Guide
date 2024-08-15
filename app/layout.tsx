@@ -17,6 +17,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link
+          href="https://unpkg.com/mapillary-js@4.1.2/dist/mapillary.css"
+          rel="stylesheet"
+        />
+      </head>
       <body className={`${work_sans.variable} ${sora.variable}`}>
         <Providers>
           <div className="h-screen min-w-screen">{children} </div>

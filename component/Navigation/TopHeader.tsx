@@ -1,6 +1,8 @@
+import { useState } from "react";
 import Button from "@/component/shared/ui/button";
 import {
   CloseToastIcon,
+  GeoLocateIcon,
   RouteIcon,
   StartNavigationIcon,
 } from "@/utils/exports/app-icons";
@@ -21,6 +23,7 @@ import { Input } from "../shared/ui/input";
 import RouteIcons from "../shared/ui/routeIcons";
 import RouteTab from "@/component/Navigation/map-components/RouteTab";
 import RouteInfoSkeleton from "@/component/shared/ui/skeleton/RouteInfoSkeleton";
+import StepCard from "./StepCard";
 
 const TopHeader = () => {
   const { MAP_CONFIG } = APP_CONFIG;
@@ -36,6 +39,7 @@ const TopHeader = () => {
     routeProfile,
   } = useAppContext();
   const { current: mymap } = useMap();
+  const [usedCurrentLocation, setUsedCurrentLocation] = useState(false);
 
   // route request
   const { data, isLoading, isError, error } = useGetRoute(
@@ -73,7 +77,7 @@ const TopHeader = () => {
           : "md:top-7 md:left-7 md:rounded-3xl md:h-fit"
       } rounded-t-3xl rounded-b-none bg-white shadow-modal bottom-0 md:w-fit w-full z-50 flex`}
     >
-      <div className={`md:w-fit w-full flex flex-col h-full`}>
+      <div className={`md:w-fit w-full flex flex-col`}>
         {/* <div>
         <Button
           href="/"
@@ -87,7 +91,7 @@ const TopHeader = () => {
         </Button>
       </div> */}
         <div
-          className={`flex flex-col gap-5 lg:w-[26rem] md:w-[24rem] w-full lg:px-10 lg:py-8 md:px-4 md:py-6 px-4 py-6`}
+          className={`flex flex-col gap-5 h-fit lg:w-[26rem] md:w-[24rem] w-full lg:px-10 lg:py-8 md:px-4 md:py-6 px-4 py-6`}
         >
           <Button href="/" className={`md:block hidden p-0 text-blue-300`}>
             <CG />
@@ -100,6 +104,7 @@ const TopHeader = () => {
                 <Input
                   placeholder="Where are you right now?"
                   className="w-full"
+                  value={usedCurrentLocation ? "Your Location": ""}
                 />
                 {startMarker && (
                   <CloseToastIcon
@@ -128,26 +133,37 @@ const TopHeader = () => {
               </div>
             </div>
           </div>
+          {!routeInfoAvailable && (
+                  <div className="flex items-center gap-4 mt-2 cursor-pointer"
+                  onClick={() => {
+                    navigator.geolocation.getCurrentPosition(
+                      (position) => {
+                        setStartMarker({
+                          latitude: position.coords.latitude,
+                          longitude: position.coords.longitude,
+                        });
+                        setUsedCurrentLocation(true);
+                      },
+                      (error) => {
+                        console.log(error);
+                      }
+                    );
+                  }}
+                >
+                  <GeoLocateIcon className="text-purple-600" />
+                  <span>Use my Current Location</span>
+                </div>
+          )}
+      
         </div>
 
         {startMarker && endMarker && (
-          <div className="border-t flex flex-col h-full border-blue-50 lg:px-10 lg:py-8 md:px-4 md:py-6 px-4 py-6">
+          <div className="border-t flex flex-auto flex-col border-blue-50 lg:px-10 lg:py-8 md:px-4 md:py-6 px-4 py-6">
             <RouteTab />
-            {routeInfoAvailable && !isLoading && (
+            {routeInfoAvailable && !isLoading ? (
               <div>
                 {routeInfo && routeInfo?.length > 0 && (
                   <div>
-                    {/* <Button
-                className="bg-cg-error px-3 py-2 w-fit font-medium md:text-p-xs text-p-xs text-white"
-                icon={<CloseToastIcon className="text-white" />}
-                iconPosition="right"
-                onClick={() => {
-                  setRouteInfo(null);
-                  setEndMarker(null);
-                }}
-              >
-                <span>Clear Route</span>
-              </Button> */}
                     <div className="mt-4 font-sora">
                       <span className="text-p-base">
                         Est. time of arrival:{" "}
@@ -161,13 +177,42 @@ const TopHeader = () => {
                     </div>
                   </div>
                 )}
+                
               </div>
-            )}
-            {isLoading && <RouteInfoSkeleton />}
+            ): isLoading ? <RouteInfoSkeleton /> : null}
+
+            
           </div>
         )}
-        {routeInfoAvailable && (
-          <div className="w-full shadow-modal md:py-6 py-2 flex items-center justify-center">
+        {
+          routeInfoAvailable && (
+            <ul className="h-full overflow-auto space-y-4 font-sora px-8 py-2 mt-1 mb-4 ">
+                {
+                  routeInfo && routeInfo?.length > 0 && (
+                    routeInfo[0].legs[0].steps.map((step, index) => {
+                      return(
+                        <StepCard 
+                          intersections={step.intersections}
+                          maneuver={step.maneuver}
+                          name={step.name}
+                          mode={step.mode}
+                          duration={step.duration}
+                          distance={step.distance}
+                          driving_side={step.driving_side}
+                          weight={step.weight}
+                          geometry={step.geometry}
+                          key={index}
+                        />
+                      )
+                    }
+                  )
+                  )}
+              </ul>
+          )
+        }
+         
+        {/* {routeInfoAvailable && (
+          <div className="w-full shadow-modal md:py-2 py-2 flex items-center justify-center">
             <Button
               className="bg-purple-200 md:px-6 md:py-[1rem] gap-2.5 w-fit font-medium md:text-s-sm text-p-xs text-white"
               icon={<StartNavigationIcon className="text-white" />}
@@ -177,7 +222,7 @@ const TopHeader = () => {
               <span>Start</span>
             </Button>
           </div>
-        )}
+        )} */}
 
         {/* <Button
         href="/"

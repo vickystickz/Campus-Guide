@@ -12,6 +12,28 @@ import StartRoute from "@/assets/icons/StartRoute";
 import Car from "@/assets/icons/Car";
 import Walk from "@/assets/icons/Walk";
 import Direction from "@/assets/icons/Direction";
+import TurnLeft from "@/assets/icons/TurnLeft";
+import TurnRight from "@/assets/icons/TurnRight";
+import ExitLeft from "@/assets/icons/ExitLeft";
+import ExitRight from "@/assets/icons/ExitRight";
+import UturnRight from "@/assets/icons/UturnRight";
+import Uturnleft from "@/assets/icons/UturnLeft";
+import ContinueStraight from "@/assets/icons/ContinueStraight";
+import KeepLeft from "@/assets/icons/KeepLeft";
+import KeepRight from "@/assets/icons/KeepRight";
+import ArriveRight from "@/assets/icons/ArriveRight";
+import ArriveLeft from "@/assets/icons/ArriveLeft";
+import SlighRight from "@/assets/icons/SlightRight";
+import SlightLeft from "@/assets/icons/SlightLeft";
+import Step from "@/assets/icons/Step";
+import Fork from "@/assets/icons/Fork";
+import ForkLeft from "@/assets/icons/ForkLeft";
+import ForkRight from "@/assets/icons/ForkRight";
+import ForkSlightRight from "@/assets/icons/ForkSlightRight";
+import ForkSlightLeft from "@/assets/icons/ForkSlightLeft";
+import ExitSlightLeft from "@/assets/icons/ExitSlightLeft";
+import ExitSlightRight from "@/assets/icons/ExitSlightRight";
+
 // exports Icons for App Use
 export {
     BaseMap as BaseMapIcon,
@@ -27,7 +49,30 @@ export {
     StartRoute as StartRouteIcon,
     Car as CarIcon,
     Walk as WalkIcon,
-    Direction as StartNavigationIcon
+    Direction as StartNavigationIcon,
+
+    // Directions Icon
+    KeepLeft as KeepLeftIcon,
+    KeepRight as KeepRightIcon,
+    TurnLeft as TurnLeftIcon,
+    TurnRight as TurnRightIcon,
+    ExitLeft as ExitLeftIcon,
+    ExitRight as ExitRightIcon,
+    ExitSlightLeft as ExitSlightLeftIcon,
+    ExitSlightRight as ExitSlightRightIcon,
+    UturnRight as UturnRightIcon,
+    Uturnleft as UturnleftIcon,
+    ContinueStraight as ContinueStraightIcon,
+    ArriveRight as ArriveRightIcon,
+    ArriveLeft as ArriveLeftIcon,
+    SlighRight as SlightRightIcon,
+    SlightLeft as SlightLeftIcon,
+    Step as StepIcon,
+    Fork as ForkIcon,
+    ForkLeft as ForkLeftIcon,
+    ForkRight as ForkRightIcon,
+    ForkSlightRight as ForkSlightRightIcon,
+    ForkSlightLeft as ForkSlightLeftIcon,
 }
 
 

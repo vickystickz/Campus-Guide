@@ -22,6 +22,7 @@
     "framer-motion": "^11.2.10",
     "lucide-react": "^0.394.0",
     "mapbox-gl": "^3.4.0",
+    "mapillary-js": "^4.1.2",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
