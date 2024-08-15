@@ -10,7 +10,7 @@ const GeoLocateControl = () => {
   const { current: mymap } = useMap();
   const [activate, setActivate] = useState(false);
   const { TOOLTIP_CONFIG } = APP_CONFIG
-  const { setStartMarker, startMarker } = useAppContext();
+  const { setStartMarker, startMarker, currentLocation, setCurrentLocation } = useAppContext();
 
   const handleGetUserLocation = () => {
     if (!activate) {
@@ -19,7 +19,7 @@ const GeoLocateControl = () => {
         navigator.geolocation.getCurrentPosition(
           (position) => {
             const { latitude, longitude } = position.coords;
-            setStartMarker({
+            setCurrentLocation({
               longitude: longitude,
               latitude: latitude,
             });
@@ -37,14 +37,20 @@ const GeoLocateControl = () => {
         console.error("Geolocation is not supported by this browser.");
       }
     } else {
-      if(activate && startMarker){
-        setStartMarker(null)
+      if(activate && currentLocation){
+        setCurrentLocation(null)
         setActivate(false);
         return
       }
       setActivate(false)
     }
   };
+
+  useEffect(() => {
+    if(!currentLocation && startMarker){
+      setActivate(false)
+    }
+  }, [currentLocation, activate, startMarker]);
   
   return (
     <TooltipWrapper

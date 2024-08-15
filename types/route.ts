@@ -19,7 +19,7 @@ export type RouteData = {
     admins: Admin[];
     weight: number;
     duration: number;
-    steps: Step[];
+    steps: StepType[];
     distance: number;
     summary: string;
   }
@@ -29,9 +29,9 @@ export type RouteData = {
     iso_3166_1: string;
   }
   
-  interface Step {
-    intersections: Intersection[];
-    maneuver: Maneuver;
+  export type StepType = {
+    intersections: IntersectionType[];
+    maneuver: ManeuverType;
     name: string;
     duration: number;
     distance: number;
@@ -41,7 +41,7 @@ export type RouteData = {
     geometry: Geometry;
   }
   
-  interface Intersection {
+  export type IntersectionType = {
     entry: boolean[];
     bearings: number[];
     duration?: number;
@@ -61,7 +61,7 @@ export type RouteData = {
     class: string;
   }
   
-  interface Maneuver {
+  export type  ManeuverType = {
     type: string;
     instruction: string;
     bearing_after: number;

@@ -2,14 +2,14 @@
 // Convert time in seconds to a formatted string in hrs and mins and seconds strings
 const getFormattedEstimatedTime = (time: number) => {
     if (time < 60) {
-        return `${time.toFixed()} sec`;
+        return `${time.toFixed()}s`;
     }
 
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
 
     if (hours === 0) {
-        return `${minutes} min`;
+        return minutes === 1 ? `${minutes}min` : `${minutes}mins`;
     }
     
     return `${hours} hrs ${minutes} mins`;
@@ -17,9 +17,9 @@ const getFormattedEstimatedTime = (time: number) => {
 // Convert distance in meters to a formatted string in km alone or m
 const getFormattedDistance = (distance: number) => {
     if (distance >= 1000) {
-        return `${(distance / 1000).toFixed(1)} km`;
+        return `${(distance / 1000).toFixed(1)}km`;
     }
-    return `${distance.toFixed()} m`;
+    return `${distance.toFixed()}m`;
 }
 
 

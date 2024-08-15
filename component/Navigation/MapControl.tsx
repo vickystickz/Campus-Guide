@@ -2,6 +2,7 @@ import React from "react";
 import BaseMapControl from "./map-components/BaseMapControl";
 import GeoLocateControl from "./map-components/GeoLocateControl";
 import ZoomControl from "./map-components/ZoomControl";
+import LayersControl from "./map-components/LayersControl";
 
 const MapControl = () => {
   return (
@@ -10,6 +11,7 @@ const MapControl = () => {
       <div className="space-y-4 flex flex-col ">
         <GeoLocateControl />
         <BaseMapControl />
+        {/* <LayersControl /> */}
       </div>
     </div>
   );

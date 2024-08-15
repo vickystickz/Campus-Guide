@@ -1,4 +1,4 @@
-import { LineLayer } from "mapbox-gl";
+import { LineLayer,CircleLayer } from "mapbox-gl";
 import { CarIcon, WalkIcon } from "@/utils/exports/app-icons";
 import { SVGProps } from "react";
 
@@ -34,7 +34,13 @@ type APP_CONFIG_TYPE = {
   };
 
   Layer_CONFIG: {
-    LineStyle: LineLayer;
+    DriveLineStyle: LineLayer;
+    CircleStyle: CircleLayer;
+    WalkLineStyle: LineLayer;
+    MapillaryStyle: {
+      Line: LineLayer,
+      Circle: CircleLayer
+    };
   };
   
   ROUTE_CONFIG: {
@@ -82,8 +88,8 @@ const APP_CONFIG: APP_CONFIG_TYPE = {
   },
 
   Layer_CONFIG: {
-    LineStyle: {
-      id: "route",
+    DriveLineStyle: {
+      id: "route-car",
       type: "line",
       paint: {
         "line-width": 6,
@@ -93,6 +99,60 @@ const APP_CONFIG: APP_CONFIG_TYPE = {
         visibility: "visible", // the layer will always show by default when the map loads
       },
     },
+    WalkLineStyle: {
+      id: "route-walk",
+      type: "line",
+      paint: {
+        "line-width": 2,
+        "line-color": "#992BF4",
+      },
+      layout: {
+        visibility: "visible", // the layer will always show by default when the map loads
+      },
+    },
+    CircleStyle: {
+      id: "route-circle-walk",
+      type: "circle",
+      paint: {
+        "circle-radius": 4,
+        "circle-color": "#992BF4",
+        "circle-stroke-width": 1,
+        "circle-stroke-color": "#fff",
+      },
+      layout: {
+        visibility: "visible", // the layer will always show by default when the map loads
+      },
+    },
+    MapillaryStyle:{
+
+      Circle:{
+      id: 'mapillary',
+      type: 'circle',
+      source: 'mapillary',
+      'source-layer': 'sequence',
+      paint: {
+        'circle-radius': 5,
+        'circle-color': 'rgb(53, 175, 109)',
+        'circle-stroke-width': 1,
+        'circle-stroke-color': 'rgb(34, 139, 84)',
+      },
+    },
+  Line:{
+    id: 'mapillary-lines',
+    type: 'line',
+    source: 'mapillary',
+    'source-layer': 'sequence',
+    layout: {
+      'line-cap': 'round',
+      'line-join': 'round',
+    },
+    paint: {
+      'line-color': 'rgb(53, 175, 109)',
+      'line-opacity': 0.6,
+      'line-width': 2,
+    },
+    }
+  }
   },
 
   ROUTE_CONFIG: {
