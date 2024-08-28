@@ -1,6 +1,7 @@
-import { LineLayer,CircleLayer } from "mapbox-gl";
-import { CarIcon, WalkIcon } from "@/utils/exports/app-icons";
+import { LineLayer,CircleLayer, FillLayer } from "mapbox-gl";
+import { CarIcon, WalkIcon, DirectionTabIcon, CampusTabIcon } from "@/utils/exports/app-icons";
 import { SVGProps } from "react";
+import { PolygonGeometry } from "mapillary-js";
 
 type APP_CONFIG_TYPE = {
   projectStatus: string;
@@ -16,6 +17,11 @@ type APP_CONFIG_TYPE = {
       NAVIGATION_DAY: string;
     };
   };
+  TABS: Array<{
+    id: "campus" | "direction";
+    label: string;
+    icon: (props: SVGProps<SVGSVGElement>) => JSX.Element;
+  }>;
   TOAST_CONFIG: {
     FEEDBACKS: {
       SUCCESS: {
@@ -37,6 +43,10 @@ type APP_CONFIG_TYPE = {
     DriveLineStyle: LineLayer;
     CircleStyle: CircleLayer;
     WalkLineStyle: LineLayer;
+    BoundaryStyle: {
+      FillLayer: FillLayer,
+      LineLayer: LineLayer
+    };
     MapillaryStyle: {
       Line: LineLayer,
       Circle: CircleLayer
@@ -68,6 +78,19 @@ const APP_CONFIG: APP_CONFIG_TYPE = {
       NAVIGATION_DAY: "mapbox://styles/mapbox/navigation-day-v1",
     },
   },
+
+  TABS:[
+    {
+      id: "campus",
+      label: "Campus",
+      icon: CampusTabIcon,
+    },
+    {
+      id: "direction",
+      label: "Direction",
+      icon: DirectionTabIcon,
+    }
+  ], 
 
   TOAST_CONFIG: {
     FEEDBACKS: {
@@ -114,7 +137,7 @@ const APP_CONFIG: APP_CONFIG_TYPE = {
       id: "route-circle-walk",
       type: "circle",
       paint: {
-        "circle-radius": 4,
+        "circle-radius": 2,
         "circle-color": "#992BF4",
         "circle-stroke-width": 1,
         "circle-stroke-color": "#fff",
@@ -122,6 +145,24 @@ const APP_CONFIG: APP_CONFIG_TYPE = {
       layout: {
         visibility: "visible", // the layer will always show by default when the map loads
       },
+    },
+    BoundaryStyle: {
+
+      FillLayer: {
+      id: "FUTA-fill",
+      type: "fill",
+      paint: {
+        "fill-color": "#F3E6FE",
+        "fill-opacity": 0.3,
+      }},
+      LineLayer: {
+        id: "FUTA-line",
+        type: "line",
+        paint: {
+          "line-color": "#510094",
+          "line-width": 2,
+        },
+      }
     },
     MapillaryStyle:{
 

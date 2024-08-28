@@ -17,7 +17,7 @@
   --cg-purple-75: #cd96fa;
   --cg-purple-100: #b86bf7;
   --cg-purple-200: #992bf4;
-  --cg-purple-300: #6b00f0;
+  --cg-purple-300: #8400F2;
   --cg-purple-400: #5c00a9;
   --cg-purlpe-500: #510094;
 
@@ -36,6 +36,7 @@
   --cg-error: #ff4343;
   --cg-warning: #eeee27;
   --cg-white:#EFEEF3;
+  --cg-white-dark:#F4F6F8;
 
 
   --font-size-primary-h1: 8rem;
@@ -124,9 +125,13 @@ body,
 
 @layer components{
   .map-control-icon{
-    @apply h-fit  w-fit;
+    @apply h-4 w-4;
   }
   .btn{
     @apply md:py-4 md:px-6 py-2.5 px-4 rounded-full ;
+  }
+
+  .sidebar-style{
+    @apply border-2 border-solid border-cg-blue-200;
   }
 }

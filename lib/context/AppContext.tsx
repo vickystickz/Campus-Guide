@@ -10,13 +10,16 @@ import React, {
   useEffect,
 } from "react";
 import type { FeatureCollection } from "geojson";
+import {LngLatBoundsLike} from "mapbox-gl";
 
 import APP_CONFIG from "@/constant/config";
 import { RouteType, ManeuverType } from "@/types/route";
+import { CampusDataType } from "@/utils/campus-data";
 
 interface AppContextProps {
   baseMap: string;
   route: FeatureCollection;
+  activeTab: "campus" | "direction";
   setRoute: Dispatch<SetStateAction<FeatureCollection>>;
   routeInfo: RouteType[] | null;
   setRouteInfo: Dispatch<SetStateAction<RouteType[] | null>>;
@@ -25,6 +28,7 @@ interface AppContextProps {
   mapillaryImageId: string | null;
   setMapillaryImageId: Dispatch<SetStateAction<string | null>>;
   setBaseMap: Dispatch<SetStateAction<string>>;
+  setActiveTab: Dispatch<SetStateAction<"campus" | "direction">>;
   showMap: boolean;
   setShowMap: Dispatch<SetStateAction<boolean>>;
   mapLoaded: boolean;
@@ -94,6 +98,11 @@ interface AppContextProps {
   } | null;
   selectedStep: ManeuverType | { location: number[]; instruction: string } | null;
   setSelectedStep: Dispatch< SetStateAction<ManeuverType | { location: number[]; instruction: string } | null>>
+  setSelectedCampus: Dispatch<SetStateAction<CampusDataType | null>>;
+  selectedCampus: CampusDataType | null;
+  maxBounds: LngLatBoundsLike | undefined;
+  setMaxBounds: Dispatch<SetStateAction<LngLatBoundsLike | undefined>>;
+  handleActiveTab: (tab: "campus" | "direction") => void;
 }
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -115,6 +124,7 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     APP_CONFIG.MAP_CONFIG.MAP_STYLE.DEFAULT
   );
   const [showMap, setShowMap] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<"campus" | "direction">("campus");
   const [route, setRoute] = useState<FeatureCollection>({
     type: "FeatureCollection",
     features: [
@@ -139,6 +149,7 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     latitude: APP_CONFIG.MAP_CONFIG.MAP_CENTER[1],
     zoom: 7,
   });
+  const [maxBounds, setMaxBounds] = useState<LngLatBoundsLike | undefined>(undefined);
   const [startMarker, setStartMarker] = useState<{
     longitude: number;
     latitude: number;
@@ -163,6 +174,7 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
   //Layers
   const [mapillaryImageId, setMapillaryImageId] = useState<string | null>(null);
+  const [selectedCampus, setSelectedCampus] = useState< CampusDataType | null>(null);
 
   useEffect(() => {
     if (routeInfo) {
@@ -194,6 +206,11 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     }
   }, [routeInfo, setRoute]);
 
+
+  const handleActiveTab = (tab: "campus" | "direction") => {
+    setActiveTab(tab);
+  }
+
   const value = useMemo(
     () => ({
       baseMap,
@@ -223,11 +240,19 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
       currentLocation,
       setCurrentLocation,
       selectedStep,
-      setSelectedStep
+      setSelectedStep,
+      activeTab,
+      setActiveTab,
+      handleActiveTab,
+      selectedCampus,
+      setSelectedCampus,
+      maxBounds,
+      setMaxBounds
     }),
     [
       baseMap,
       currentLocation,
+      activeTab,
       endMarker,
       interactiveLayerIds,
       mapLoaded,
@@ -239,7 +264,9 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
       showMap,
       startMarker,
       viewState,
-      selectedStep
+      selectedStep,
+      selectedCampus,
+      maxBounds
     ]
   );
 

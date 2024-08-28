@@ -33,6 +33,13 @@ import ForkSlightRight from "@/assets/icons/ForkSlightRight";
 import ForkSlightLeft from "@/assets/icons/ForkSlightLeft";
 import ExitSlightLeft from "@/assets/icons/ExitSlightLeft";
 import ExitSlightRight from "@/assets/icons/ExitSlightRight";
+import DirectionTab from "@/assets/icons/DirectionTab";
+import CampusTab from "@/assets/icons/CampusTab";
+import SearchIcon from "@/assets/icons/SearchIcon";
+import University from "@/assets/icons/University";
+import FlatStartMarker from "@/assets/icons/FlatStartMarker";
+import MyLocation from "@/assets/icons/MyLocation";
+import School from "@/assets/icons/School";
 
 // exports Icons for App Use
 export {
@@ -73,6 +80,15 @@ export {
     ForkRight as ForkRightIcon,
     ForkSlightRight as ForkSlightRightIcon,
     ForkSlightLeft as ForkSlightLeftIcon,
+
+    DirectionTab as DirectionTabIcon,
+    CampusTab as CampusTabIcon,
+    SearchIcon,
+    University as UniversityIcon,
+    FlatStartMarker as FlatStartMarkerIcon,
+    MyLocation as MyLocationIcon,
+    School as SchoolIcon,
+
 }
 
 

@@ -20,9 +20,9 @@ const WebMapLayout = ({
     children: React.ReactNode
   }) => {
   return (
-    <>
+    <main className='h-screen min-w-full m-0 p-0'>
         {children}
-    </>
+    </main>
   )
 }
 

@@ -7,6 +7,7 @@ import MapControl from "@/component/Navigation/MapControl";
 import Markers from "@/component/Navigation/map-components/Markers";
 import APP_CONFIG from "@/constant/config";
 import type { FeatureCollection } from "geojson";
+import { CAMPUS_DATA } from "@/utils/campus-data";
 
 const MapCanvas = () => {
   const mapContainer = useRef(null);
@@ -22,25 +23,26 @@ const MapCanvas = () => {
     setMapLoaded,
     setMapillaryImageId,
     route,
-    routeProfile
+    routeProfile,
+    maxBounds
   } = useAppContext();
 
   const mapillaryTilesUrl = `https://tiles.mapillary.com/maps/vtp/mly1_computed_public/2/{z}/{x}/{y}?access_token=${MAPILLARY_TOKEN}`;
-  
-  const handleMapClickEvent =(event: MapLayerMouseEvent) =>{
-    const { features } = event;
-    if(features && features.length>0){
-      // Query the Mapillary layer features at the clicked point
-    const mapillaryFeatures = features.filter(
-      (feature) => feature.layer.id === 'mapillary'
-    );
 
-    if (mapillaryFeatures.length) {
-      const imageId = mapillaryFeatures[0]?.properties?.image_id;
-      console.log(mapillaryFeatures)
-      setMapillaryImageId(imageId)
-    }
-    return
+  const handleMapClickEvent = (event: MapLayerMouseEvent) => {
+    const { features } = event;
+    if (features && features.length > 0) {
+      // Query the Mapillary layer features at the clicked point
+      const mapillaryFeatures = features.filter(
+        (feature) => feature.layer.id === "mapillary"
+      );
+
+      if (mapillaryFeatures.length) {
+        const imageId = mapillaryFeatures[0]?.properties?.image_id;
+        console.log(mapillaryFeatures);
+        setMapillaryImageId(imageId);
+      }
+      return;
     }
     if (!startMarker) return;
     if (endMarker) return;
@@ -48,8 +50,7 @@ const MapCanvas = () => {
       longitude: event.lngLat.lng,
       latitude: event.lngLat.lat,
     });
-}
-
+  };
 
   return (
     <Map
@@ -59,11 +60,9 @@ const MapCanvas = () => {
       dragRotate={true}
       mapboxAccessToken={MAPBOX_TOKEN}
       initialViewState={viewState}
+      maxBounds={maxBounds}
       mapStyle={baseMap}
-      interactiveLayerIds={[
-        "mapillary",
-        "route"
-      ]}
+      interactiveLayerIds={["mapillary", "route"]}
       onLoad={() => {
         setMapLoaded(!mapLoaded);
       }}
@@ -79,35 +78,59 @@ const MapCanvas = () => {
         customAttribution={CUSTOM_ATTRIBUTION}
       />
       {mapLoaded && <MapControl />}
-      <Markers />
       {mapLoaded && (
         <>
           <Source id="route" type="geojson" data={route}>
-          {routeProfile === "driving"  && (
-            <Layer {...Layer_CONFIG.DriveLineStyle} />
-          )}
-          {routeProfile === "walking" && (
-            <Layer {...Layer_CONFIG.WalkLineStyle} />)}
-          {routeProfile === "walking" && (
-            <Layer {...Layer_CONFIG.CircleStyle} />
-          )}
+            {routeProfile === "driving" && (
+              <Layer {...Layer_CONFIG.DriveLineStyle} />
+            )}
+            {routeProfile === "walking" && (
+              <Layer {...Layer_CONFIG.WalkLineStyle} />
+            )}
+            {routeProfile === "walking" && (
+              <Layer {...Layer_CONFIG.CircleStyle} />
+            )}
           </Source>
-          <Source id="mapillary" type="vector" tiles={[mapillaryTilesUrl]} minzoom={6} maxzoom={14}  >
+          <Source
+            id="mapillary"
+            type="vector"
+            tiles={[mapillaryTilesUrl]}
+            minzoom={6}
+            maxzoom={14}
+          >
             <Layer
               {...Layer_CONFIG.MapillaryStyle.Line}
               layout={{
-                visibility:"none"
+                visibility: "none",
               }}
             />
             <Layer
               {...Layer_CONFIG.MapillaryStyle.Circle}
               layout={{
-                visibility:"none"
+                visibility: "none",
               }}
             />
           </Source>
+          {CAMPUS_DATA.map((campus, index) => (
+            <Source
+              key={`campus-boundary-${index}`}
+              id={`campus-boundary-${index}`}
+              type="geojson"
+              data={campus.layer}
+            >
+              <Layer
+                {...Layer_CONFIG.BoundaryStyle.FillLayer}
+                id={`campus-fill-${index}`}
+              />
+              <Layer
+                {...Layer_CONFIG.BoundaryStyle.LineLayer}
+                id={`campus-line-${index}`}
+              />
+            </Source>
+          ))}
         </>
       )}
+      <Markers />
     </Map>
   );
 };

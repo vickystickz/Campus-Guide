@@ -10,7 +10,6 @@ import CG from "@/assets/icons/CG";
 import { useAppContext } from "@/lib/context/AppContext";
 import APP_CONFIG from "@/constant/config";
 import type { RouteData } from "@/types/route";
-import { sora } from "@/app/font";
 import { useGetPlace, useGetRoute } from "@/lib/api/query";
 import { useMap } from "react-map-gl";
 import { useEffect } from "react";
@@ -85,7 +84,7 @@ const TopHeader = () => {
         <span className="bg-neutral-400 rounded-full h-[0.3rem] w-[4rem]"></span>
       </div>
       <div
-        className={`md:w-fit w-full flex-col transition-all duration-300 ease-in-out  ${
+        className={`md:w-fit w-full h-full flex-col transition-all duration-300 ease-in-out  ${
           showModal
             ? "max-h-[calc(100vh-2rem)] opacity-100 transform translate-y-0"
             : "max-h-0 opacity-0 transform translate-y-full overflow-hidden"
@@ -184,7 +183,7 @@ const TopHeader = () => {
             ) : null}
           </div>
         )}
-        {routeInfoAvailable && (
+        {routeInfoAvailable && (  
           <ul className="md:h-full h-[15rem]  overflow-auto space-y-4 font-sora px-8 py-2 mt-1 mb-4 ">
             {routeInfo &&
               routeInfo?.length > 0 &&
@@ -206,6 +205,28 @@ const TopHeader = () => {
               })}
           </ul>
         )}
+
+         {routeInfoAvailable && (
+        <div className="w-full shadow-modal md:py-2 py-2 flex items-center justify-center">
+          <Button
+            className="bg-purple-200 md:px-6 md:py-[1rem] gap-2.5 w-fit font-medium md:text-s-sm text-p-xs text-white"
+            icon={<StartNavigationIcon className="text-white" />}
+            iconPosition="left"
+            onClick={() => {}}
+          >
+            <span>Start</span>
+          </Button>
+        </div>
+      )}
+
+      {/* <Button
+      href="/"
+      className="bg-purple-300 font-medium w-fit h-fit md:text-p-base text-p-xs text-white"
+      icon={<RouteIcon />}
+      iconPosition="right"
+    >
+      <span>Contribute</span>
+    </Button> */}
       </div>
     </div>
   );

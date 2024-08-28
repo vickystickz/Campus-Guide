@@ -77,7 +77,8 @@ const config: Config = {
           success: "var(--cg-success)",
           warning: "var(--cg-warning)",
           info: "var(--cg-info)",
-          white: "var(--cg-white)"
+          white: "var(--cg-white)",
+          whitedark: "var(--cg-white-dark)"
         },
       },
       backgroundImage: {
@@ -85,6 +86,7 @@ const config: Config = {
       },
       boxShadow: {
           icon: "0px 0px 16px 0px #18002C1A",
+          btn: "0px 0px 8px 0px #3F2B501A",
           toast: "0px 0px 16px 0px #18002C1A",
           tooltip: "0px 0px 16px 0px #18002C1A",
           modal: "0px 0px 24px 0px #18002C29"
