@@ -1,3 +1,4 @@
+"use client"
 import { SVGProps, useEffect, useState } from "react";
 
 const MyLocation = (props: SVGProps<SVGSVGElement>) => {
