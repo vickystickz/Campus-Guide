@@ -5,12 +5,13 @@ import { useMap } from "react-map-gl";
 import { useEffect, useState } from "react";
 import TooltipWrapper from "@/component/shared/ui/wrapper/TooltipWrapper";
 import APP_CONFIG from "@/constant/config";
+import { TABS_ID } from "@/constant/enum";
 
 const GeoLocateControl = () => {
   const { current: mymap } = useMap();
   const [activate, setActivate] = useState(false);
   const { TOOLTIP_CONFIG } = APP_CONFIG
-  const { setStartMarker, startMarker, currentLocation, setCurrentLocation } = useAppContext();
+  const { setStartMarker, startMarker, currentLocation, setCurrentLocation, setActiveTab } = useAppContext();
 
   const handleGetUserLocation = () => {
     if (!activate) {
@@ -23,6 +24,7 @@ const GeoLocateControl = () => {
               longitude: longitude,
               latitude: latitude,
             });
+            setActiveTab(TABS_ID.DIRECTION)
             if (!mymap) return;
             mymap.flyTo({
               center: [longitude, latitude],

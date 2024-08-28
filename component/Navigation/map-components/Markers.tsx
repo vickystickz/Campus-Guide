@@ -3,31 +3,85 @@ import {
   StartMarkerIcon,
   EndMarkerIcon,
   StepIcon,
+  FlatStartMarkerIcon,
+  MyLocationIcon,
+  SchoolIcon
 } from "@/utils/exports/app-icons";
-import Image from "next/image";
-import LocationPin from "@/assets/location-pin.gif"
+import { CAMPUS_DATA } from "@/utils/campus-data";
 import { Marker, Popup, useMap } from "react-map-gl";
-import { useAppContext } from "@/lib/context/AppContext";;
+import { useAppContext } from "@/lib/context/AppContext";
+import { TABS_ID } from "@/constant/enum";
+
+
 
 const Markers = () => {
   const { current: mymap } = useMap();
-  const { startMarker, endMarker, currentLocation, setCurrentLocation, setEndMarker, setStartMarker, setSelectedStep, selectedStep, routeInfo } =
-    useAppContext();
+  const {
+    startMarker,
+    endMarker,
+    currentLocation,
+    setCurrentLocation,
+    setEndMarker,
+    setStartMarker,
+    setSelectedStep,
+    selectedStep,
+    routeInfo,
+    selectedCampus,
+    setMaxBounds,
+    setActiveTab
+  } = useAppContext();
 
+
+  const calculateMaxBounds = (coordinates: number[][], bufferPercentage = 0.1) => {
+    let minLng = Infinity;
+    let minLat = Infinity;
+    let maxLng = -Infinity;
+    let maxLat = -Infinity;
+  
+    coordinates.forEach(([lng, lat]) => {
+      minLng = Math.min(minLng, lng);
+      minLat = Math.min(minLat, lat);
+      maxLng = Math.max(maxLng, lng);
+      maxLat = Math.max(maxLat, lat);
+    });
+  
+    // Calculate the range of latitude and longitude
+    const lngRange = maxLng - minLng;
+    const latRange = maxLat - minLat;
+  
+    // Apply the buffer
+    const lngBuffer = lngRange * bufferPercentage;
+    const latBuffer = latRange * bufferPercentage;
+  
+    return [
+      [minLng - lngBuffer, minLat - latBuffer], // Southwest corner with buffer
+      [maxLng + lngBuffer, maxLat + latBuffer]  // Northeast corner with buffer
+    ];
+  }
 
   useEffect(() => {
-    if(startMarker){
-      setCurrentLocation(null)
-      if(!mymap) return
+    if (startMarker) {
+      setCurrentLocation(null);
+      if (!mymap) return;
       mymap.flyTo({
         center: [startMarker.longitude, startMarker.latitude],
         zoom: 14,
       });
     }
-  },[mymap, setCurrentLocation, startMarker])
+    if(selectedCampus){
+      if (!mymap) return;
+      mymap.flyTo({
+        center: [selectedCampus.longitude, selectedCampus.latitude],
+        zoom: 12,
+      })
+      const Bounds: any  = calculateMaxBounds(selectedCampus.layer.features[0].geometry.coordinates[0], 0.09)
+      setMaxBounds(Bounds)
+      setActiveTab(TABS_ID.DIRECTION)
+    }
+  }, [mymap, setCurrentLocation, startMarker, selectedCampus, setMaxBounds, setActiveTab]);
   return (
     <div>
-       {endMarker && (
+      {endMarker && (
         <Marker
           draggable={true}
           onDragEnd={(e) => {
@@ -55,13 +109,14 @@ const Markers = () => {
           longitude={currentLocation.longitude}
           latitude={currentLocation.latitude}
           anchor="bottom"
-          onClick={() => setSelectedStep({
-            location: [currentLocation.longitude, currentLocation.latitude],
-            instruction: "Your current location"
-          })} // Set the selected step on click
+          onClick={() =>
+            setSelectedStep({
+              location: [currentLocation.longitude, currentLocation.latitude],
+              instruction: "Your current location",
+            })
+          } // Set the selected step on click
         >
-
-          <Image src={LocationPin} alt="current location" />
+          <MyLocationIcon  />
         </Marker>
       )}
       {startMarker && (
@@ -85,10 +140,14 @@ const Markers = () => {
             });
           }}
         >
-          <StartMarkerIcon className="cursor-pointer" />
+          {routeInfo && routeInfo[0] ? (
+            <FlatStartMarkerIcon className="cursor-pointer" />
+          ) : (
+            <StartMarkerIcon className="cursor-pointer" />
+          )}
         </Marker>
       )}
-      {routeInfo &&
+      {/* {routeInfo &&
         routeInfo[0]?.legs[0]?.steps.map((step, index) => {
           return (
             <Marker
@@ -101,14 +160,29 @@ const Markers = () => {
               <StepIcon className="text-white shawdow-icon h-2 w-2 cursor-pointer" />
             </Marker>
           );
-        })}
+        })} */}
+
+      {CAMPUS_DATA.map((campus) => {
+        return (
+          <Marker
+            key={campus.id}
+            longitude={campus.longitude}
+            latitude={campus.latitude}
+            anchor="bottom"
+            onClick={() => {
+              
+            }} // Set the selected step on click
+          >
+            <SchoolIcon className="cursor-pointer" />
+          </Marker>
+        );
+      })}
 
       {selectedStep && (
         <Popup
           longitude={selectedStep.location[0]}
           latitude={selectedStep.location[1]}
-          anchor="bottom"
-          closeOnClick={false}
+          anchor="bottom-left"
           onClose={() => setSelectedStep(null)} // Close the popup when clicked outside
         >
           <div>

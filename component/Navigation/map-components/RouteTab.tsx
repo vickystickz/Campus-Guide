@@ -8,17 +8,15 @@ const RouteTab = () => {
   const { routeProfile, setRouteProfile } = useAppContext();
 
   return (
-    <div className="flex items-center gap-6">
+    <div className="flex items-center p-4 bg-white gap-6">
       {
         ROUTE_CONFIG.ROUTE_TABS.map((tab) => (
           <Button
             key={tab.id}
-            className={`${routeProfile === tab.id ? "bg-purple-200 text-white" : "bg-none text-blue-100"} hover:gap-2.5 transition-all px-3.5 gap-2.5 font-sora py-2 w-fit font-medium md:text-s-sm text-p-xs`}
-            icon={<tab.icon />}
-            iconPosition="left"
+            className={`${routeProfile === tab.id ? "bg-purple-200 text-white" : "bg-blue-50 text-blue-200"} hover:gap-2.5 flex items-center justify-center  transition-all px-3.5 gap-2.5 font-sora p-3 rounded-full font-medium md:text-s-sm text-p-xs`}
             onClick={() => setRouteProfile(tab.id)}
           >
-            <span>{tab.label}</span>
+            <tab.icon className="h-6 w-6" />
           </Button>
         ))
       }

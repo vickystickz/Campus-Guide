@@ -33,7 +33,7 @@ const Button: React.FC<ButtonProps> = ({
     role,
 }) => {
 	const disabledClasses = 'opacity-30 cursor-not-allowed';
-	const classes = `btn transition-all-100 ${size} ${icon && 'flex items-center justify-center transition-all duration-150 delay-150  ease-in-out hover:gap-4 gap-2'} ${disabled ? disabledClasses : '' } ${variant} ${className || ''} ${block ? 'block' : ''} ${rounded ? 'rounded' : ''} ${shadow ? 'shadow' : ''} ${outline ? 'outline' : ''}`;
+	const classes = `btn transition-all-100 ${size} ${icon && 'flex items-center justify-center transition-all duration-150 delay-150  ease-in-out gap-2'} ${disabled ? disabledClasses : '' } ${variant} ${className || ''} ${block ? 'block' : ''} ${rounded ? 'rounded' : ''} ${shadow ? 'shadow' : ''} ${outline ? 'outline' : ''}`;
     const Tag = href ? 'a' : Component;
 
     return (
