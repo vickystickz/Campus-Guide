@@ -90,7 +90,7 @@ type APP_CONFIG_TYPE = {
 
 const APP_CONFIG: APP_CONFIG_TYPE = {
   projectStatus: "In Progress",
-  percentage: 40.6,
+  percentage: 60,
   CUSTOM_ATTRIBUTION:
     "Development by YouthMappers. Project led by Victor Ademoyero & Olanrewaju Micheal",
 

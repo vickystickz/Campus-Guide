@@ -3,6 +3,7 @@ import { work_sans, sora } from "@/app/font";
 import { Providers } from "@/lib/context/Providers";
 import "./globals.css";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Campus Guide",
@@ -25,7 +26,9 @@ export default function RootLayout({
       </head>
       <body className={`${work_sans.variable} ${sora.variable}`}>
         <Providers>
-          <div className="h-screen min-w-screen">{children} </div>
+          <Suspense>
+            <div className="h-screen min-w-screen">{children} </div>
+          </Suspense>
         </Providers>
       </body>
     </html>
