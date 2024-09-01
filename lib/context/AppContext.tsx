@@ -2,20 +2,26 @@ import React, {
   createContext,
   useContext,
   useMemo,
-  useReducer,
   useState,
   ReactNode,
   Dispatch,
   SetStateAction,
   useEffect,
 } from "react";
+import { APP_DOMAIN } from "@/utils/urls";
 import type { FeatureCollection } from "geojson";
-import {LngLatBoundsLike} from "mapbox-gl";
+import { LngLatBoundsLike } from "mapbox-gl";
 
 import APP_CONFIG from "@/constant/config";
 import { RouteType, ManeuverType } from "@/types/route";
 import { CampusDataType } from "@/utils/campus-data";
+import { useRouter } from "next/navigation";
+import {encodeCoordinate } from "@/utils/url-code";
 
+type PointType = {
+  longitude: number;
+  latitude: number;
+} | null;
 interface AppContextProps {
   baseMap: string;
   route: FeatureCollection;
@@ -96,13 +102,32 @@ interface AppContextProps {
     longitude: number;
     latitude: number;
   } | null;
-  selectedStep: ManeuverType | { location: number[]; instruction: string } | null;
-  setSelectedStep: Dispatch< SetStateAction<ManeuverType | { location: number[]; instruction: string } | null>>
+  modal: {
+    visible: boolean;
+    type: "share" | "feedback" | null;
+  };
+  setModal: Dispatch<
+    SetStateAction<{
+      visible: boolean;
+      type: "share" | "feedback" | null;
+    }>
+  >;
+  selectedStep:
+    | ManeuverType
+    | { location: number[]; instruction: string }
+    | null;
+  setSelectedStep: Dispatch<
+    SetStateAction<
+      ManeuverType | { location: number[]; instruction: string } | null
+    >
+  >;
   setSelectedCampus: Dispatch<SetStateAction<CampusDataType | null>>;
   selectedCampus: CampusDataType | null;
   maxBounds: LngLatBoundsLike | undefined;
   setMaxBounds: Dispatch<SetStateAction<LngLatBoundsLike | undefined>>;
   handleActiveTab: (tab: "campus" | "direction") => void;
+  setSharedUrl: Dispatch<SetStateAction<string | null>>;
+  sharedUrl: string | null;
 }
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -120,9 +145,11 @@ interface AppProviderProps {
 }
 
 const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
+  const router = useRouter();
   const [baseMap, setBaseMap] = useState<string>(
     APP_CONFIG.MAP_CONFIG.MAP_STYLE.DEFAULT
   );
+  const [sharedUrl, setSharedUrl] = useState<string | null>(null);
   const [showMap, setShowMap] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<"campus" | "direction">("campus");
   const [route, setRoute] = useState<FeatureCollection>({
@@ -149,7 +176,9 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     latitude: APP_CONFIG.MAP_CONFIG.MAP_CENTER[1],
     zoom: 7,
   });
-  const [maxBounds, setMaxBounds] = useState<LngLatBoundsLike | undefined>(undefined);
+  const [maxBounds, setMaxBounds] = useState<LngLatBoundsLike | undefined>(
+    undefined
+  );
   const [startMarker, setStartMarker] = useState<{
     longitude: number;
     latitude: number;
@@ -167,18 +196,29 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     latitude: number;
   } | null>(null);
   const [selectedStep, setSelectedStep] = useState<
- {
-    location: number[];
-    instruction: string;
-  } |  ManeuverType | null>(null);
+    | {
+        location: number[];
+        instruction: string;
+      }
+    | ManeuverType
+    | null
+  >(null);
 
   //Layers
   const [mapillaryImageId, setMapillaryImageId] = useState<string | null>(null);
-  const [selectedCampus, setSelectedCampus] = useState< CampusDataType | null>(null);
+  const [selectedCampus, setSelectedCampus] = useState<CampusDataType | null>(
+    null
+  );
+  const [modal, setModal] = useState<{
+    visible: boolean;
+    type: "share" | "feedback" | null;
+  }>({
+    visible: false,
+    type: null,
+  });
 
   useEffect(() => {
     if (routeInfo) {
-      console.log(routeInfo);
       setRoute({
         type: "FeatureCollection",
         features: [
@@ -206,10 +246,30 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     }
   }, [routeInfo, setRoute]);
 
+  useEffect(() => {
+    if (routeInfo && routeInfo?.length > 0 && startMarker && endMarker) {
+      const encodeRouteCoordinate = encodeCoordinate([
+        `${startMarker?.longitude},${startMarker?.latitude}`,
+        `${endMarker?.longitude},${endMarker?.latitude}`,
+      ]);
+
+      const newUrl = generateRouteUrl(APP_DOMAIN, encodeRouteCoordinate);
+      router.replace(newUrl);
+      setSharedUrl(newUrl);
+    }
+    return;
+  }, [endMarker, routeInfo, router, startMarker]);
 
   const handleActiveTab = (tab: "campus" | "direction") => {
     setActiveTab(tab);
-  }
+  };
+
+  const generateRouteUrl = (
+    domain: string | undefined,
+    encodeRouteCoordinate: string
+  ): string => {
+    return `${domain}/map?route=${encodeRouteCoordinate}`;
+  };
 
   const value = useMemo(
     () => ({
@@ -247,26 +307,32 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
       selectedCampus,
       setSelectedCampus,
       maxBounds,
-      setMaxBounds
+      setMaxBounds,
+      setModal,
+      setSharedUrl,
+      sharedUrl,
+      modal,
     }),
     [
       baseMap,
-      currentLocation,
-      activeTab,
-      endMarker,
+      startMarker,
+      viewState,
       interactiveLayerIds,
-      mapLoaded,
-      mapillaryImageId,
       progressMarker,
+      showMap,
+      endMarker,
+      mapLoaded,
       route,
       routeInfo,
       routeProfile,
-      showMap,
-      startMarker,
-      viewState,
+      mapillaryImageId,
+      currentLocation,
       selectedStep,
+      activeTab,
       selectedCampus,
-      maxBounds
+      maxBounds,
+      sharedUrl,
+      modal,
     ]
   );
 

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { MAPBOX_TOKEN, MAPILLARY_TOKEN } from "@/utils/urls";
 import Map, { AttributionControl, Source, Layer } from "react-map-gl";
 import { MapLayerMouseEvent } from "mapbox-gl";
@@ -6,8 +6,8 @@ import { useAppContext } from "@/lib/context/AppContext";
 import MapControl from "@/component/Navigation/MapControl";
 import Markers from "@/component/Navigation/map-components/Markers";
 import APP_CONFIG from "@/constant/config";
-import type { FeatureCollection } from "geojson";
 import { CAMPUS_DATA } from "@/utils/campus-data";
+import OtherMenu from "./OtherMenu";
 
 const MapCanvas = () => {
   const mapContainer = useRef(null);
@@ -17,6 +17,7 @@ const MapCanvas = () => {
     baseMap,
     viewState,
     setEndMarker,
+    setStartMarker,
     endMarker,
     startMarker,
     mapLoaded,
@@ -24,27 +25,35 @@ const MapCanvas = () => {
     setMapillaryImageId,
     route,
     routeProfile,
-    maxBounds
+    maxBounds,
+    modal,
+    setModal
   } = useAppContext();
 
   const mapillaryTilesUrl = `https://tiles.mapillary.com/maps/vtp/mly1_computed_public/2/{z}/{x}/{y}?access_token=${MAPILLARY_TOKEN}`;
 
   const handleMapClickEvent = (event: MapLayerMouseEvent) => {
-    const { features } = event;
-    if (features && features.length > 0) {
-      // Query the Mapillary layer features at the clicked point
-      const mapillaryFeatures = features.filter(
-        (feature) => feature.layer.id === "mapillary"
-      );
+    // const { features } = event;
+    // if (features && features.length > 0) {
+    //   // Query the Mapillary layer features at the clicked point
+    //   const mapillaryFeatures = features.filter(
+    //     (feature) => feature.layer.id === "mapillary"
+    //   );
 
-      if (mapillaryFeatures.length) {
-        const imageId = mapillaryFeatures[0]?.properties?.image_id;
-        console.log(mapillaryFeatures);
-        setMapillaryImageId(imageId);
-      }
+    //   if (mapillaryFeatures.length) {
+    //     const imageId = mapillaryFeatures[0]?.properties?.image_id;
+    //     console.log(mapillaryFeatures);
+    //     setMapillaryImageId(imageId);
+    //   }
+    //   return;
+    // }
+    if (!startMarker){
+      setStartMarker({
+        longitude: event.lngLat.lng,
+        latitude: event.lngLat.lat,
+      })
       return;
     }
-    if (!startMarker) return;
     if (endMarker) return;
     setEndMarker({
       longitude: event.lngLat.lng,
@@ -78,6 +87,7 @@ const MapCanvas = () => {
         customAttribution={CUSTOM_ATTRIBUTION}
       />
       {mapLoaded && <MapControl />}
+      {mapLoaded && <OtherMenu />}
       {mapLoaded && (
         <>
           <Source id="route" type="geojson" data={route}>

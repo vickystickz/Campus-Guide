@@ -3,9 +3,12 @@ import { Input } from "@/component/shared/ui/input";
 import { CloseToastIcon, GeoLocateIcon } from "@/utils/exports/app-icons";
 import { useAppContext } from "@/lib/context/AppContext";
 import RouteIcons from "@/component/shared/ui/routeIcons";
+import { useRouter } from "next/navigation";
+import { APP_DOMAIN } from "@/utils/urls";
 
 const DirectionSearch = () => {
-  const { startMarker, setStartMarker, setRouteInfo, endMarker, setEndMarker } =
+  const router = useRouter();
+  const { startMarker, setStartMarker, routeInfo, setRouteInfo, endMarker, setEndMarker, setSharedUrl } =
     useAppContext();
   const [usedCurrentLocation, setUsedCurrentLocation] = useState(false);
   const [isLoadingCurrentLocation, setIsLoadingCurrentLocation] = useState(false);
@@ -24,8 +27,12 @@ const DirectionSearch = () => {
               <CloseToastIcon
                 className="absolute top-4 right-2 h-4 w-4 hover:text-cg-error"
                 onClick={() => {
+                  if(routeInfo){
+                    setRouteInfo(null);
+                    router.push(`${APP_DOMAIN}/map`);
+                  }
                   setStartMarker(null);
-                  setRouteInfo(null);
+                  setSharedUrl(null);
                 }}
               />
             )}
@@ -39,8 +46,12 @@ const DirectionSearch = () => {
               <CloseToastIcon
                 className="absolute top-4 right-2 h-4 w-4 hover:text-cg-error"
                 onClick={() => {
+                  if(routeInfo){
+                    setRouteInfo(null);
+                    router.push(`${APP_DOMAIN}/map`);
+                  }
                   setEndMarker(null);
-                  setRouteInfo(null);
+                  setSharedUrl(null);
                 }}
               />
             )}

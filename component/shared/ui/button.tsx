@@ -55,11 +55,11 @@ const Button: React.FC<ButtonProps> = ({
                  
                 </div>
             ) : (
-                <>
+                <div className='flex items-center gap-2'>
                     {icon && iconPosition === 'left' && <span className="icon">{icon}</span>}
                     {children}
                     {icon && iconPosition === 'right' && <span className="icon">{icon}</span>}
-                </>
+                </div>
             )}
         </Tag>
     );

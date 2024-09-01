@@ -134,4 +134,8 @@ body,
   .sidebar-style{
     @apply border-2 border-solid border-cg-blue-200;
   }
+
+  .modal-overlay {
+    @apply fixed inset-0 flex backdrop-blur-sm z-50 w-screen h-screen items-center justify-center p-4 transition duration-300 ease-out data-[closed]:opacity-0;
+  }
 }

@@ -37,7 +37,7 @@ const SideBar = () => {
         </div>
         {/* Footer:  Not available for Mobile View */}
         <div className="hidden h-fit md:flex items-center gap-2 py-2 bg-cg-whitedark justify-center">
-          <span className=" text-center text-xs">Builtc with </span>
+          <span className=" text-center text-xs">Built with </span>
           <LoveIcon className="w-3 h-3" />
         </div>
       </section>
