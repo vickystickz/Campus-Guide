@@ -5,14 +5,12 @@ import {
   StepIcon,
   FlatStartMarkerIcon,
   MyLocationIcon,
-  SchoolIcon
+  SchoolIcon,
 } from "@/utils/exports/app-icons";
 import { CAMPUS_DATA } from "@/utils/campus-data";
 import { Marker, Popup, useMap } from "react-map-gl";
 import { useAppContext } from "@/lib/context/AppContext";
 import { TABS_ID } from "@/constant/enum";
-
-
 
 const Markers = () => {
   const { current: mymap } = useMap();
@@ -28,36 +26,39 @@ const Markers = () => {
     routeInfo,
     selectedCampus,
     setMaxBounds,
-    setActiveTab
+    setActiveTab,
+    handleActiveTab,
   } = useAppContext();
 
-
-  const calculateMaxBounds = (coordinates: number[][], bufferPercentage = 0.1) => {
+  const calculateMaxBounds = (
+    coordinates: number[][],
+    bufferPercentage = 0.1
+  ) => {
     let minLng = Infinity;
     let minLat = Infinity;
     let maxLng = -Infinity;
     let maxLat = -Infinity;
-  
+
     coordinates.forEach(([lng, lat]) => {
       minLng = Math.min(minLng, lng);
       minLat = Math.min(minLat, lat);
       maxLng = Math.max(maxLng, lng);
       maxLat = Math.max(maxLat, lat);
     });
-  
+
     // Calculate the range of latitude and longitude
     const lngRange = maxLng - minLng;
     const latRange = maxLat - minLat;
-  
+
     // Apply the buffer
     const lngBuffer = lngRange * bufferPercentage;
     const latBuffer = latRange * bufferPercentage;
-  
+
     return [
       [minLng - lngBuffer, minLat - latBuffer], // Southwest corner with buffer
-      [maxLng + lngBuffer, maxLat + latBuffer]  // Northeast corner with buffer
+      [maxLng + lngBuffer, maxLat + latBuffer], // Northeast corner with buffer
     ];
-  }
+  };
 
   useEffect(() => {
     if (startMarker) {
@@ -67,18 +68,30 @@ const Markers = () => {
         center: [startMarker.longitude, startMarker.latitude],
         zoom: 14,
       });
+      handleActiveTab(TABS_ID.DIRECTION);
     }
-    if(selectedCampus){
+    if (selectedCampus) {
       if (!mymap) return;
       mymap.flyTo({
         center: [selectedCampus.longitude, selectedCampus.latitude],
         zoom: 12,
-      })
-      const Bounds: any  = calculateMaxBounds(selectedCampus.layer.features[0].geometry.coordinates[0], 0.09)
-      setMaxBounds(Bounds)
-      setActiveTab(TABS_ID.DIRECTION)
+      });
+      const Bounds: any = calculateMaxBounds(
+        selectedCampus.layer.features[0].geometry.coordinates[0],
+        0.09
+      );
+      setMaxBounds(Bounds);
+      setActiveTab(TABS_ID.DIRECTION);
     }
-  }, [mymap, setCurrentLocation, startMarker, selectedCampus, setMaxBounds, setActiveTab]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    mymap,
+    setCurrentLocation,
+    startMarker,
+    selectedCampus,
+    setMaxBounds,
+    setActiveTab,
+  ]);
   return (
     <div>
       {endMarker && (
@@ -116,7 +129,7 @@ const Markers = () => {
             })
           } // Set the selected step on click
         >
-          <MyLocationIcon  />
+          <MyLocationIcon />
         </Marker>
       )}
       {startMarker && (
@@ -169,9 +182,7 @@ const Markers = () => {
             longitude={campus.longitude}
             latitude={campus.latitude}
             anchor="bottom"
-            onClick={() => {
-              
-            }} // Set the selected step on click
+            onClick={() => {}} // Set the selected step on click
           >
             <SchoolIcon className="cursor-pointer" />
           </Marker>

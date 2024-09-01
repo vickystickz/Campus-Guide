@@ -40,6 +40,14 @@ import University from "@/assets/icons/University";
 import FlatStartMarker from "@/assets/icons/FlatStartMarker";
 import MyLocation from "@/assets/icons/MyLocation";
 import School from "@/assets/icons/School";
+import Menu from "@/assets/icons/Menu";
+import Feedback from "@/assets/icons/Feedback";
+import ShareRoute from "@/assets/icons/ShareRoute";
+import Contribute from "@/assets/icons/Contribute";
+import LogoVector from "@/assets/icons/LogoVector";
+import Mail from "@/assets/icons/Mail";
+import WhatsApp from "@/assets/icons/WhatsApp";
+import X from "@/assets/icons/X";
 
 // exports Icons for App Use
 export {
@@ -88,7 +96,14 @@ export {
     FlatStartMarker as FlatStartMarkerIcon,
     MyLocation as MyLocationIcon,
     School as SchoolIcon,
-
+    Menu as MenuIcon,
+    Feedback as FeedbackIcon,
+    ShareRoute as ShareRouteIcon,
+    Contribute as ContributeIcon,
+    LogoVector,
+    Mail as MailIcon,
+    WhatsApp as WhatsAppIcon,
+    X as XIcon
 }
 
 

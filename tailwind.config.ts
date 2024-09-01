@@ -89,7 +89,8 @@ const config: Config = {
           btn: "0px 0px 8px 0px #3F2B501A",
           toast: "0px 0px 16px 0px #18002C1A",
           tooltip: "0px 0px 16px 0px #18002C1A",
-          modal: "0px 0px 24px 0px #18002C29"
+          modal: "0px 0px 24px 0px #18002C29",
+          menu: "0px 0px 32px 0px #18002C1A"
       }
     },
   },

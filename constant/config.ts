@@ -1,7 +1,17 @@
-import { LineLayer,CircleLayer, FillLayer } from "mapbox-gl";
-import { CarIcon, WalkIcon, DirectionTabIcon, CampusTabIcon } from "@/utils/exports/app-icons";
+import { LineLayer, CircleLayer, FillLayer } from "mapbox-gl";
+import {
+  CarIcon,
+  WalkIcon,
+  DirectionTabIcon,
+  CampusTabIcon,
+  ContributeIcon,
+  ShareRouteIcon,
+  FeedbackIcon,
+  WhatsAppIcon,
+  MailIcon,
+  XIcon,
+} from "@/utils/exports/app-icons";
 import { SVGProps } from "react";
-import { PolygonGeometry } from "mapillary-js";
 
 type APP_CONFIG_TYPE = {
   projectStatus: string;
@@ -16,6 +26,11 @@ type APP_CONFIG_TYPE = {
       NAVIGATION_NIGHT: string;
       NAVIGATION_DAY: string;
     };
+    MAP_TOP_MENU: Array<{
+      id: string;
+      value: string;
+      icon: (props: SVGProps<SVGSVGElement>) => JSX.Element;
+    }>;
   };
   TABS: Array<{
     id: "campus" | "direction";
@@ -37,6 +52,10 @@ type APP_CONFIG_TYPE = {
       ZOOM_OUT: string;
       BASEMAP: string;
     };
+    MAP_TOP_MENU: {
+      MENU: string;
+      APPEARANCE: string;
+    };
   };
 
   Layer_CONFIG: {
@@ -44,15 +63,15 @@ type APP_CONFIG_TYPE = {
     CircleStyle: CircleLayer;
     WalkLineStyle: LineLayer;
     BoundaryStyle: {
-      FillLayer: FillLayer,
-      LineLayer: LineLayer
+      FillLayer: FillLayer;
+      LineLayer: LineLayer;
     };
     MapillaryStyle: {
-      Line: LineLayer,
-      Circle: CircleLayer
+      Line: LineLayer;
+      Circle: CircleLayer;
     };
   };
-  
+
   ROUTE_CONFIG: {
     ROUTE_TABS: Array<{
       id: "driving" | "walking" | "cycling";
@@ -60,13 +79,20 @@ type APP_CONFIG_TYPE = {
       icon: (props: SVGProps<SVGSVGElement>) => JSX.Element;
     }>;
   };
+
+  SHARE_ROUTE_CONFIG: Array<{
+      id: "mail" | "x" | "whatsapp";
+      href: string;
+      label: string;
+      icon: (props: SVGProps<SVGSVGElement>) => JSX.Element;
+    }>;
 };
 
 const APP_CONFIG: APP_CONFIG_TYPE = {
   projectStatus: "In Progress",
-  percentage: 40.6,
+  percentage: 60,
   CUSTOM_ATTRIBUTION:
-    "Development by YouthMappers. Project led by Victor Ademoyero",
+    "Development by YouthMappers. Project led by Victor Ademoyero & Olanrewaju Micheal",
 
   MAP_CONFIG: {
     MAP_CENTER: [5.210266, 7.250771],
@@ -77,9 +103,26 @@ const APP_CONFIG: APP_CONFIG_TYPE = {
       NAVIGATION_NIGHT: "mapbox://styles/mapbox/navigation-night-v1",
       NAVIGATION_DAY: "mapbox://styles/mapbox/navigation-day-v1",
     },
+    MAP_TOP_MENU: [
+      {
+        id: "contribute",
+        value: "Contribute",
+        icon: ContributeIcon,
+      },
+      {
+        id: "share",
+        value: "Share route",
+        icon: ShareRouteIcon,
+      },
+      {
+        id: "feedback",
+        value: "Feedback",
+        icon: FeedbackIcon,
+      },
+    ],
   },
 
-  TABS:[
+  TABS: [
     {
       id: "campus",
       label: "Campus",
@@ -89,8 +132,8 @@ const APP_CONFIG: APP_CONFIG_TYPE = {
       id: "direction",
       label: "Direction",
       icon: DirectionTabIcon,
-    }
-  ], 
+    },
+  ],
 
   TOAST_CONFIG: {
     FEEDBACKS: {
@@ -108,6 +151,10 @@ const APP_CONFIG: APP_CONFIG_TYPE = {
       ZOOM_OUT: "Zoom Out",
       BASEMAP: "Change Basemap",
     },
+    MAP_TOP_MENU: {
+      MENU: "Menu",
+      APPEARANCE: "toogle",
+    },
   },
 
   Layer_CONFIG: {
@@ -121,6 +168,7 @@ const APP_CONFIG: APP_CONFIG_TYPE = {
       layout: {
         visibility: "visible", // the layer will always show by default when the map loads
       },
+      source: ""
     },
     WalkLineStyle: {
       id: "route-walk",
@@ -132,6 +180,7 @@ const APP_CONFIG: APP_CONFIG_TYPE = {
       layout: {
         visibility: "visible", // the layer will always show by default when the map loads
       },
+      source: ""
     },
     CircleStyle: {
       id: "route-circle-walk",
@@ -145,16 +194,18 @@ const APP_CONFIG: APP_CONFIG_TYPE = {
       layout: {
         visibility: "visible", // the layer will always show by default when the map loads
       },
+      source: ""
     },
     BoundaryStyle: {
-
       FillLayer: {
-      id: "FUTA-fill",
-      type: "fill",
-      paint: {
-        "fill-color": "#F3E6FE",
-        "fill-opacity": 0.3,
-      }},
+        id: "FUTA-fill",
+        type: "fill",
+        paint: {
+          "fill-color": "#F3E6FE",
+          "fill-opacity": 0.3,
+        },
+        source: ""
+      },
       LineLayer: {
         id: "FUTA-line",
         type: "line",
@@ -162,38 +213,38 @@ const APP_CONFIG: APP_CONFIG_TYPE = {
           "line-color": "#510094",
           "line-width": 2,
         },
-      }
-    },
-    MapillaryStyle:{
-
-      Circle:{
-      id: 'mapillary',
-      type: 'circle',
-      source: 'mapillary',
-      'source-layer': 'sequence',
-      paint: {
-        'circle-radius': 5,
-        'circle-color': 'rgb(53, 175, 109)',
-        'circle-stroke-width': 1,
-        'circle-stroke-color': 'rgb(34, 139, 84)',
+        source: ""
       },
     },
-  Line:{
-    id: 'mapillary-lines',
-    type: 'line',
-    source: 'mapillary',
-    'source-layer': 'sequence',
-    layout: {
-      'line-cap': 'round',
-      'line-join': 'round',
+    MapillaryStyle: {
+      Circle: {
+        id: "mapillary",
+        type: "circle",
+        source: "mapillary",
+        "source-layer": "sequence",
+        paint: {
+          "circle-radius": 5,
+          "circle-color": "rgb(53, 175, 109)",
+          "circle-stroke-width": 1,
+          "circle-stroke-color": "rgb(34, 139, 84)",
+        },
+      },
+      Line: {
+        id: "mapillary-lines",
+        type: "line",
+        source: "mapillary",
+        "source-layer": "sequence",
+        layout: {
+          "line-cap": "round",
+          "line-join": "round",
+        },
+        paint: {
+          "line-color": "rgb(53, 175, 109)",
+          "line-opacity": 0.6,
+          "line-width": 2,
+        },
+      },
     },
-    paint: {
-      'line-color': 'rgb(53, 175, 109)',
-      'line-opacity': 0.6,
-      'line-width': 2,
-    },
-    }
-  }
   },
 
   ROUTE_CONFIG: {
@@ -210,6 +261,26 @@ const APP_CONFIG: APP_CONFIG_TYPE = {
       },
     ],
   },
+  SHARE_ROUTE_CONFIG: [
+    {
+      id: "whatsapp",
+      href: "https://api.whatsapp.com/send?text=Check out this link:",
+      label: "Whatsapp",
+      icon: WhatsAppIcon,
+    },
+    {
+      id: "x",
+      href: "https://twitter.com/intent/tweet?text=Check%20out%20this%20link!%20",
+      label: "X",
+      icon: XIcon,
+    },
+    {
+      id: "mail",
+      href:"mailto:someone@example.com?subject=Check%20this%20out&body=Here%20is%20the%20link%20you%20requested:%20",
+      label: "Mail",
+      icon: MailIcon,
+    },
+  ],
 };
 
 export default APP_CONFIG;
