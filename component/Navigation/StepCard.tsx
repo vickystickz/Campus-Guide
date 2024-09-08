@@ -108,7 +108,7 @@ const StepCard = ({
     });
   }
   return (
-    <li className="bg-white border-[1px] bg-cg-white h-fit rounded-2xl shadow-md cursor-pointer"
+    <li className="bg-white bg-cg-white h-fit cursor-pointer"
       onClick={()=>handleStepClick(maneuver)}
     >
       <div className="p-4 flex items-center justify-between">

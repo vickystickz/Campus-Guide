@@ -16,6 +16,7 @@ import { Input } from "../ui/input";
 import Button from "../ui/button";
 import Link from "next/link";
 import { toast } from "@/lib/context/use-toast";
+import { getFormattedEstimatedTime } from "@/utils/navigation";
 
 const ModalProvider = () => {
   const { routeProfile, modal, setModal } = useAppContext();
@@ -55,7 +56,10 @@ const ShareModal = ({
   onOpenChange: (open: boolean) => void;
 }) => {
   const { SHARE_ROUTE_CONFIG } = APP_CONFIG;
-  const { sharedUrl } = useAppContext();
+  const { sharedUrl, routeInfo } = useAppContext();
+
+
+  const activeRouteDetails = routeInfo && routeInfo.length > 0;
 
   return (
     <Dialog
@@ -76,21 +80,21 @@ const ShareModal = ({
           <div className="flex items-center gap-4">
             <RouteProfileActiveIcon routeProfile={routeProfile} />
             <div className="w-full ">
-              <p className="text-p-base font-medium text-blue-400 truncate text-ellipsis w-[95%]">
+              {/* <p className="text-p-base font-medium text-blue-400 truncate text-ellipsis w-[95%]">
                 <span className="text-p-base font-medium text-blue-100 ">
                   From
                 </span>{" "}
                 FUTA NorthGate
-              </p>
+              </p> */}
               <div className="flex items-center justify-between">
                 <p className="text-p-base font-medium text-blue-400  w-[70%] truncate">
                   <span className="text-p-base font-medium text-blue-100">
-                    To
+                  To:
                   </span>{" "}
-                  Akindeko Hostel
+                  {activeRouteDetails && routeInfo[0].legs[0].summary}
                 </p>
                 <span className="text-p-base font-medium text-blue-100">
-                  4 minutes
+                  {activeRouteDetails && getFormattedEstimatedTime(routeInfo[0].duration)}
                 </span>
               </div>
             </div>
