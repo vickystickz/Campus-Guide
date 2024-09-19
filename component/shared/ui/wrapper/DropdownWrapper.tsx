@@ -25,7 +25,7 @@ type DropdownWrapperProps = {
   onSelect: (item: string) => void;
   onOpenChange?: (open: boolean) => void;
   activeItem?: string;
-  disabledItem?: string;
+  disabledItems?: Array<string>;
 };
 
 const DropdownWrapper = ({
@@ -40,7 +40,7 @@ const DropdownWrapper = ({
   onSelect,
   onOpenChange,
   activeItem,
-  disabledItem
+  disabledItems
 }: DropdownWrapperProps) => {
   return (
     <DropdownMenu onOpenChange={onOpenChange}>
@@ -63,9 +63,9 @@ const DropdownWrapper = ({
               "hover:bg-blue-200 hover:text-white font-semibold text-blue-200 py-2 px-3 rounded-md md:mt-2 mt-1 md:mx-2 mx-1 cursor-pointer transition-all ease-in-out duration-150 delay-150",
               item.icon && "flex items-center gap-2",
               menuItemClassName,
-              item.id === disabledItem && "cursor-not-allowed"
+              item.id === disabledItems?.find((disabledItem) => disabledItem === item.id) && "cursor-not-allowed"
             )}
-            disabled={item.id === disabledItem}
+            disabled={item.id === disabledItems?.find((disabledItem) => disabledItem === item.id)}
             key={item.id}
             onSelect={() => onSelect(item.id)}
           >

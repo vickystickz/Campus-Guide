@@ -16,7 +16,7 @@ const OtherMenu = () => {
     };
 
   return (
-    <div className="absolute top-4 right-10">
+    <div className="absolute top-4 right-7">
       <DropdownWrapper
         MenuItems={MAP_CONFIG.MAP_TOP_MENU}
         onOpenChange={(status) => {}}
@@ -24,7 +24,7 @@ const OtherMenu = () => {
         onSelect={handleSelect}
         align="end"
         side="bottom"
-        disabledItem={sharedUrl ? "" : "share"}
+        disabledItems={["feedback", sharedUrl ? "" : "share"]}
         menuItemClassName="hover:text-white w-[13.6rem]"
         menuContentClassName="bg-white rounded-xl md:w-fit p-4 shadow-menu"
         footer={

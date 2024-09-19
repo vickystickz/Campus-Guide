@@ -1,7 +1,8 @@
 import axios from "axios";
+import { MAPBOX_DIRECTION_API, PHOTON_BASE_URL}  from "@/utils/urls";
 
 const mapboxDirectionInstance = axios.create({
-    baseURL: "https://api.mapbox.com/directions/v5",
+    baseURL: MAPBOX_DIRECTION_API,
     headers: {
         "Content-Type": "application/json",
         timeout : 1000,
@@ -10,7 +11,7 @@ const mapboxDirectionInstance = axios.create({
 
 
 const photonInstance = axios.create({
-    baseURL: "https://photon.komoot.io/api",
+    baseURL: PHOTON_BASE_URL,
     headers: {
         "Content-Type": "application/json",
         timeout : 1000,

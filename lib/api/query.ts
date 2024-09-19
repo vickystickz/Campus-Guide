@@ -21,10 +21,10 @@ const useGetRoute = (
   
 
 // this is a custom hook that uses the useQuery hook from react-query to fetch place data
-const useGetPlace = ( query: string, limit = 5, geoPosition?: { lat: number; lon: number }, osmTag?: string ) => {
+const useGetPlace = ( query: string, limit = 5, viewbox?: string ) => {
     return useQuery({
-        queryKey: ["place", query, limit, geoPosition, osmTag],
-        queryFn: () => getPlace(query, limit, geoPosition, osmTag),
+        queryKey: ["place", query, limit, viewbox],
+        queryFn: () => getPlace(query, limit, viewbox),
         enabled: !!query,
     });
 };
