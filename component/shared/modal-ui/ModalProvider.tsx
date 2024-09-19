@@ -68,8 +68,8 @@ const ShareModal = ({
       transition
       className="modal-overlay"
     >
-      <DialogPanel className="font-work-sans bg-white rounded-xl md:w-[29.75rem] w-[24rem]">
-        <div className="p-6 space-y-8">
+      <DialogPanel className="font-work-sans bg-white rounded-xl md:w-[29.75rem] w-[20rem]">
+        <div className="p-6 md:space-y-8 space-y-3">
           <DialogTitle className="font-sora text-base text-blue-300 flex justify-between">
             Share Route
             <CloseToast
@@ -86,8 +86,8 @@ const ShareModal = ({
                 </span>{" "}
                 FUTA NorthGate
               </p> */}
-              <div className="flex items-center justify-between">
-                <p className="text-p-base font-medium text-blue-400  w-[70%] truncate">
+              <div className="flex flex-col md:flex-row md:items-center gap-4">
+                <p className="text-p-base font-medium text-blue-400 w-[70%] truncate">
                   <span className="text-p-base font-medium text-blue-100">
                   To:
                   </span>{" "}
@@ -107,7 +107,7 @@ const ShareModal = ({
             />
 
             <Button
-              icon={<Copy />}
+              icon={<Copy className="md:h-auto md:w-auto h-4 w-4" />}
               className="w-fit border-blue-50 hover:text-white hover:bg-blue-200  hover:bg py-2 px-4 border-[1px] text-blue-300 text-sm"
               onClick={() => {
                 if (sharedUrl) {
@@ -132,8 +132,8 @@ const ShareModal = ({
               target="_blank"
               className="flex flex-col items-center gap-2 cursor-pointer hover:opacity-80"
             >
-              <item.icon />
-              <span className="text-blue-200 text-p-base">{item.label}</span>
+              <item.icon className="md:h-auto md:w-auto h-5 w-5" />
+              <span className="text-blue-200 md:text-p-base text-sm">{item.label}</span>
             </Link>
           ))}
         </div>

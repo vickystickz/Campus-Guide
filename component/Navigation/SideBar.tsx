@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CG from "@/assets/icons/CG";
 import Button from "@/component/shared/ui/button";
 import Tabs from "@/component/Navigation/sidebar/Tabs";
@@ -13,10 +13,21 @@ const SideBar = () => {
     activeTab
   } = useAppContext();
 
+  const [showSidebar, setShowSidebar] = useState(true);
+
+  const handleHideSidebar = () => {
+
+  }
   
 
   return (
-    <aside className="md:order-1 order-last w-full md:w-[24.5rem] h-fit z-40 border-r-2 border-blue-50 md:h-full flex flex-col">
+    <aside className="md:order-1 absolute bottom-0  bg-cg-whitedark order-last w-full md:w-[24.5rem] h-fit z-40 border-r-2 border-blue-50 md:h-full flex flex-col">
+      <div
+        className="md:hidden flex items-center justify-center py-2 hover:cursor-pointer"
+        onClick={() => setShowSidebar(!showSidebar)}
+      >
+        <span className={` ${showSidebar? "bg-neutral-400": "bg-neutral-500"} rounded-full h-[0.3rem] w-[4rem]`}></span>
+      </div>
       {/* Top Sidebar Header */}
       <section className="h-fit w-full md:order-first order-last">
         <div className="md:block hidden md:border-0 border-b-[1px] py-4 px-5 border-blue-50">
@@ -28,8 +39,9 @@ const SideBar = () => {
         <Tabs />
       </section>
 
+
       {/* Sidebar Body */}
-      <section className="flex-auto flex flex-col w-full">
+      <section className={`flex-auto flex flex-col w-full transition-all duration-300 ease-in-out  ${showSidebar? " max-h-[calc(100vh-2rem)] opacity-100 transform translate-y-0": "max-h-0 hidden opacity-0 transform translate-y-full overflow-hidden"}`}>
         {/* Shows based on whihc Tab is active */}
         <div className="flex-auto bg-cg-whitedark">
           <Campus active={activeTab === TABS_ID.CAMPUS} />
