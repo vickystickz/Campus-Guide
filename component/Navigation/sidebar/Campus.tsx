@@ -1,19 +1,20 @@
 import { UniversityIcon } from "@/utils/exports/app-icons";
 import React from "react";
-import { CAMPUS_DATA, CampusDataType } from "@/utils/campus-data";
+import { CampusDataType } from "@/utils/campus-data";
 import { useAppContext } from "@/lib/context/AppContext";
 
 const Campus = ({ active }: { active: boolean }) => {
-  const { selectedCampus, setSelectedCampus, setMaxBounds, setStartMarker, setEndMarker, setRouteInfo, setRoute } = useAppContext();
+  const { selectedCampus, setSelectedCampus, setMaxBounds, setStartMarker, setEndMarker, setRouteInfo, availableCampus } = useAppContext();
 
   const generateAddress = (campus: CampusDataType) => {
+    if(!campus.state) return `${campus.city}, ${campus.country}`;
     return `${campus.city}, ${campus.state}, ${campus.country}`;
   };
 
   return (
     <div className={`p-4 ${active ? "block" : "hidden"}`}>
       <ul className="space-y-6">
-        {CAMPUS_DATA.map((campus, index) => {
+        {availableCampus.map((campus, index) => {
           return (
             <CampusInfo
               active={selectedCampus?.id === campus.id}

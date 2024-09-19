@@ -44,8 +44,6 @@ const RouteDetails = () => {
 
   const activeRouteDetails = routeInfo && routeInfo.length > 0;
 
-  console.log("routeInfo", routeInfo);
-
   return (
     <div className="md:space-y-6 sapace-y-4">
       <RouteTab />

@@ -1,6 +1,5 @@
 import { DRIVING, WALKING, CYCLING } from "./urls";
 import { mapboxDirectionInstance, photonInstance } from "./axios-instance";
-import { toast } from "../context/use-toast";
 
 export const getRoute = async (
     start: { lat: number; lon: number },
@@ -27,15 +26,11 @@ export const getRoute = async (
 export const getPlace = async (
   query: string,
   limit = 5,
-  geoPosition?: {
-    lat: number;
-    lon: number;
-  },
-  osmTag?: string
+  viewbox?: string
 ) => {
   try {
     const response = await photonInstance.get(
-      `/?q=${query}&limit=${limit}`
+      `?q=${query}&limit=${limit}${viewbox ? `&bbox=${viewbox}`: ""}&lang=en`
     );
     return response.data;
   } catch (error) {

@@ -14,9 +14,9 @@ import { LngLatBoundsLike } from "mapbox-gl";
 
 import APP_CONFIG from "@/constant/config";
 import { RouteType, ManeuverType } from "@/types/route";
-import { CampusDataType } from "@/utils/campus-data";
+import { CAMPUS_DATA, CampusDataType } from "@/utils/campus-data";
 import { useRouter } from "next/navigation";
-import {encodeCoordinate } from "@/utils/url-code";
+import { encodeCoordinate } from "@/utils/url-code";
 
 type PointType = {
   longitude: number;
@@ -128,6 +128,9 @@ interface AppContextProps {
   handleActiveTab: (tab: "campus" | "direction") => void;
   setSharedUrl: Dispatch<SetStateAction<string | null>>;
   sharedUrl: string | null;
+  availableCampus: CampusDataType[];
+  setAvailableCampus: Dispatch<SetStateAction<CampusDataType[]>>;
+  handleFilterCampus: (search: string) => void;
 }
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -152,6 +155,8 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [sharedUrl, setSharedUrl] = useState<string | null>(null);
   const [showMap, setShowMap] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<"campus" | "direction">("campus");
+  const [availableCampus, setAvailableCampus] =
+    useState<CampusDataType[]>(CAMPUS_DATA);
   const [route, setRoute] = useState<FeatureCollection>({
     type: "FeatureCollection",
     features: [
@@ -271,6 +276,17 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     return `${domain}/map?route=${encodeRouteCoordinate}`;
   };
 
+  const handleFilterCampus = (search: string) => {
+    if (!search) {
+      setAvailableCampus(CAMPUS_DATA);
+      return;
+    }
+    const filteredCampus = CAMPUS_DATA.filter((campus) =>
+      campus.title.toLowerCase().includes(search.toLowerCase())
+    );
+    setAvailableCampus(filteredCampus);
+  };
+
   const value = useMemo(
     () => ({
       baseMap,
@@ -306,6 +322,9 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
       handleActiveTab,
       selectedCampus,
       setSelectedCampus,
+      availableCampus,
+      setAvailableCampus,
+      handleFilterCampus,
       maxBounds,
       setMaxBounds,
       setModal,
@@ -330,6 +349,7 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
       selectedStep,
       activeTab,
       selectedCampus,
+      availableCampus,
       maxBounds,
       sharedUrl,
       modal,
