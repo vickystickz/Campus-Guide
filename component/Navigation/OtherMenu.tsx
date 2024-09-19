@@ -16,7 +16,7 @@ const OtherMenu = () => {
     };
 
   return (
-    <div className="absolute top-4 right-7">
+    <div className="absolute top-4 md:right-7 right-4">
       <DropdownWrapper
         MenuItems={MAP_CONFIG.MAP_TOP_MENU}
         onOpenChange={(status) => {}}
@@ -26,7 +26,7 @@ const OtherMenu = () => {
         side="bottom"
         disabledItems={["feedback", sharedUrl ? "" : "share"]}
         menuItemClassName="hover:text-white w-[13.6rem]"
-        menuContentClassName="bg-white rounded-xl md:w-fit p-4 shadow-menu"
+        menuContentClassName="bg-white rounded-xl w-fit p-4 shadow-menu"
         footer={
             <div className="flex flex-col gap-2 justify-center items-center mt-4">
                 <div className="flex items-center gap-2">

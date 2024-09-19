@@ -13,7 +13,7 @@ const Campus = ({ active }: { active: boolean }) => {
 
   return (
     <div className={`p-4 ${active ? "block" : "hidden"}`}>
-      <ul className="space-y-6">
+      <ul className="md:space-y-6 space-y-4 h-[12rem] pr-2 overflow-auto">
         {availableCampus.map((campus, index) => {
           return (
             <CampusInfo
@@ -65,7 +65,7 @@ const CampusInfo = ({
         <UniversityIcon />
       </div>
       <div className="h-full font-work-sans">
-        <h3 className="text-blue-300  group-hover:text-blue-700">{title}</h3>
+        <h3 className="text-blue-300 md:text-base text-sm  group-hover:text-blue-700">{title}</h3>
         <p className="text-blue-75 text-xs  group-hover:text-purple-100">
           {address}
         </p>

@@ -36,7 +36,7 @@ const Tabs = () => {
         <div
           className={`h-9 transition-all delay-150 ease-in-out transform ${
             showSearch ? "absolute right-4 left-4" : "w-9"
-          } z-20 rounded-full border-blue-50 flex items-center justify-center border-[1px] overflow-clip`}
+          } z-20 rounded-full bg-white border-blue-50 flex items-center justify-center border-[1px] overflow-clip`}
         >
           {showSearch && (
             <Input

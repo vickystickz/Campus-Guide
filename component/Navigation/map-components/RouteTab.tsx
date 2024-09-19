@@ -44,7 +44,7 @@ export const RouteProfileActiveIcon = ({
       className="p-3 bg-purple-200 text-white rounded-full w-fit"
       key={activeRouteProfile?.id}
     >
-      {activeRouteProfile && <activeRouteProfile.icon className="h-6 w-6" />}
+      {activeRouteProfile && <activeRouteProfile.icon className="md:h-6 md:w-6 h-4 w-4" />}
     </div>
   );
 };
