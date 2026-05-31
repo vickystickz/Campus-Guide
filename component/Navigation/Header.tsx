@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { COLORS } from "@/constant/design";
 import { useHideOnScroll } from "@/lib/hooks/useHideOnScroll";
-import { MapIcon, Hamburger } from "@/assets/icons";
+import { MapIcon, ContributeBg, Hamburger } from "@/assets/icons";
 
 interface HeaderProps {
   onMenuClick?: () => void;
@@ -60,7 +60,25 @@ export const Header: React.FC<HeaderProps> = ({
             <span className="text-sm font-medium">Web map</span>
           </Link>
 
-          {/* Contribute Button - Currently disabled */}
+          {/* Contribute Button */}
+          <Link
+            href="/contribute"
+            className="hidden md:flex items-center gap-2 px-5 py-2 rounded-full font-light text-white transition-all duration-300 hover:shadow-lg hover:scale-105"
+            style={{
+              backgroundColor: COLORS.primary,
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.backgroundColor =
+                COLORS.primaryLight;
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.backgroundColor =
+                COLORS.primary;
+            }}
+          >
+            <span className="text-sm">Contribute</span>
+            <ContributeBg size={13} color="white" />
+          </Link>
 
           {/* Mobile Menu Button */}
           <button

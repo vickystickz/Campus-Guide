@@ -66,6 +66,8 @@ const PictureIcon = () => (
 interface ContributeFormProps {
   onClose?: () => void;
   onSubmit?: (formData: ContributeFormData) => void;
+  isLoading?: boolean;
+  error?: string;
 }
 
 export interface ContributeFormData {
@@ -85,6 +87,8 @@ export interface ContributeFormData {
 export const ContributeForm: React.FC<ContributeFormProps> = ({
   onClose,
   onSubmit,
+  isLoading = false,
+  error = "",
 }) => {
   const { toast } = useToast();
   const [currentStep, setCurrentStep] = useState(0);
@@ -344,6 +348,7 @@ export const ContributeForm: React.FC<ContributeFormProps> = ({
                       icon={<BoundaryIcon />}
                       dragPrompt="Drag and drop campus boundary"
                       helpText="Upload your campus boundary layer in (GeoJSON or KML)"
+                      maxSizeBytes={10 * 1024 * 1024} // 10MB for boundary files
                     />
                   )}
                 />
@@ -363,6 +368,7 @@ export const ContributeForm: React.FC<ContributeFormProps> = ({
                       icon={<PictureIcon />}
                       dragPrompt="Drag and drop campus picture"
                       helpText="Add a clear picture of the entrance of your campus"
+                      maxSizeBytes={5 * 1024 * 1024} // 5MB for images
                     />
                   )}
                 />
@@ -373,11 +379,19 @@ export const ContributeForm: React.FC<ContributeFormProps> = ({
 
         {/* Buttons - At bottom */}
         <div className="w-full max-w-md flex gap-3 sm:gap-3 justify-center mb-3 sm:mb-3 px-4 sm:px-3">
+          {/* Error Message */}
+          {error && (
+            <div className="w-full text-center mb-2 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
+              ⚠️ {error}
+            </div>
+          )}
+
           {/* Previous Button - Show from step 1 onwards */}
           {currentStep > 0 && (
             <button
               onClick={handlePreviousStep}
-              className="px-10 sm:px-12 py-2.5 sm:py-2 rounded-full font-light transition-all duration-300 text-sm sm:text-base"
+              disabled={isLoading}
+              className="px-10 sm:px-12 py-2.5 sm:py-2 rounded-full font-light transition-all duration-300 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
               style={{
                 backgroundColor: "transparent",
                 borderWidth: "0.5px",
@@ -389,27 +403,36 @@ export const ContributeForm: React.FC<ContributeFormProps> = ({
             </button>
           )}
 
-          {/* Next Button (Steps 0-1) / Submit Button (Step 2)
-           */}
+          {/* Next Button (Steps 0-1) / Submit Button (Step 2) */}
           <button
             onClick={handleNextStep}
-            disabled={!isCurrentStepValid}
+            disabled={!isCurrentStepValid || isLoading}
             className="px-10 sm:px-14 py-2.5 sm:py-2 rounded-full font-light text-white transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:scale-100"
             style={{
-              backgroundColor: isCurrentStepValid ? COLORS.primary : "#ccc",
+              backgroundColor:
+                isCurrentStepValid && !isLoading ? COLORS.primary : "#ccc",
             }}
             onMouseEnter={(e) => {
-              if (isCurrentStepValid) {
+              if (isCurrentStepValid && !isLoading) {
                 e.currentTarget.style.backgroundColor = COLORS.primaryLight;
               }
             }}
             onMouseLeave={(e) => {
-              if (isCurrentStepValid) {
+              if (isCurrentStepValid && !isLoading) {
                 e.currentTarget.style.backgroundColor = COLORS.primary;
               }
             }}
           >
-            {currentStep === 2 ? "Submit" : "Next"}
+            {isLoading ? (
+              <span className="flex items-center gap-2">
+                <span className="inline-block animate-spin">⏳</span>
+                {currentStep === 2 ? "Submitting..." : "Next"}
+              </span>
+            ) : currentStep === 2 ? (
+              "Submit"
+            ) : (
+              "Next"
+            )}
           </button>
         </div>
       </div>

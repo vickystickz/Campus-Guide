@@ -75,11 +75,11 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
     return () => clearInterval(interval);
   }, []);
   return (
-    <section className="w-full py-24 sm:py-32 bg-white mt-0 pt-24 sm:pt-24 pb-24 sm:pb-32">
+    <section className="w-full py-24 sm:py-32 bg-white mt-0 pt-56 sm:pt-96 pb-24 sm:pb-32">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-12">
         {/* Header */}
         <div className="w-full text-center space-y-2">
-          <h2 className="text-xl sm:text-4xl font-semibold text-blue-300 font-sora">
+          <h2 className="text-xl sm:text-4xl font-semibold text-gray-900">
             <span className="inline">30+</span>
             <br className="inline sm:hidden" />
             <span className="inline sm:ml-3">Universities uploaded</span>
@@ -89,18 +89,31 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
         {/* Universities Grid */}
         <div className="flex justify-center w-full px-4 sm:px-0">
           <div
-            className="flex gap-4 items-center rounded-3xl overflow-hidden sm:rounded-full h-[8.6rem] py-4 sm:py-8 w-[90vw] sm:max-w-6xl bg-cg-white"
-            ref={scrollContainerRef}
+            className="rounded-3xl sm:rounded-[40px] py-4 sm:py-8 w-[90vw] sm:max-w-6xl"
+            style={{
+              backgroundColor: "#F3F4F6",
+            }}
           >
-            {universities.map((uni, idx) => (
-              <div
-                key={idx}
-                className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-blue-50 font-sora text-sm font-light transition bg-white flex-shrink-0"
-              >
-                <LocationIcon className="text-purple-75" />
-                <span className="text-blue-300 text-s-sm">{uni.name}</span>
-              </div>
-            ))}
+            <div
+              className="flex gap-4 items-center overflow-x-auto"
+              ref={scrollContainerRef}
+              style={{
+                msOverflowStyle: "none",
+                scrollbarWidth: "none",
+              }}
+            >
+              {universities.map((uni, idx) => (
+                <div
+                  key={idx}
+                  className="inline-flex items-center gap-3 px-6 py-3 rounded-full text-sm font-light transition hover:shadow-md bg-white flex-shrink-0"
+                >
+                  <LocationIcon
+                    style={{ fill: COLORS.primary, width: 20, height: 20 }}
+                  />
+                  <span>{uni.name}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

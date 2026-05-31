@@ -3,9 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { COLORS } from "@/constant/design";
-import {
-  QuickSearchIcon,
-} from "@/assets/icons";
+import { QuickSearchIcon } from "@/assets/icons";
 import CG from "@/assets/icons/CG";
 import { MapIcon } from "@/assets/icons";
 import Direction from "@/component/Navigation/sidebar/Direction";
@@ -19,7 +17,6 @@ export const QuickSearchSection: React.FC<QuickSearchSectionProps> = ({
   onExplore,
 }) => {
   const { startMarker, endMarker } = useAppContext();
-
   return (
     <section className="w-full h-screen bg-white flex items-center justify-center px-4 sm:px-6 py-12 sm:py-16 pb-16 sm:pb-24">
       <div className="w-full max-w-6xl h-full flex flex-col">
@@ -50,11 +47,12 @@ export const QuickSearchSection: React.FC<QuickSearchSectionProps> = ({
           </h3>
         </div>
 
+        {/* MOBILE LAYOUT - Image with Overlay Card */}
         <div className="flex-1 flex flex-col gap-4 sm:hidden">
           {/* Image - Mobile with Overlaid Search Card */}
           <div className="relative h-[clamp(420px,72vh,520px)] w-full rounded-3xl overflow-hidden shadow-lg">
             <Image
-              src="/buildings.png"  
+              src="/buildings.png"
               alt="Campus Buildings"
               fill
               sizes="(max-width: 640px) 100vw, 90vw"
@@ -109,7 +107,7 @@ export const QuickSearchSection: React.FC<QuickSearchSectionProps> = ({
           }}
         >
           {/* Buildings Image */}
-          <div className="relative w-full rounded-2xl overflow-hidden shadow-lg">
+          <div className="relative h-[clamp(500px,72vh,620px)] w-full rounded-2xl overflow-hidden shadow-lg">
             <Image
               src="/buildings.png"
               alt="Campus Buildings"

@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node -e \"const fs = require('fs'); fs.rmSync('.next', { recursive: true, force: true }); fs.rmSync('tsconfig.tsbuildinfo', { force: true });\"",
     "dev": "next dev",
+    "prebuild": "node -e \"const fs = require('fs'); fs.rmSync('.next', { recursive: true, force: true }); fs.rmSync('tsconfig.tsbuildinfo', { force: true });\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

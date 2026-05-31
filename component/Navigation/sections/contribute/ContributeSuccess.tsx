@@ -14,7 +14,6 @@ export const ContributeSuccess: React.FC<ContributeSuccessProps> = ({
   userName = "youthmapperX",
   userEmail = "youthmapperX@gmail.com",
 }) => {
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleGoHome = () => {

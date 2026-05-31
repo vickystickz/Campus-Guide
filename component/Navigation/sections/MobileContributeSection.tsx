@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
+import { ContributeBg } from "@/assets/icons";
 
 interface ContributeSectionProps {}
 
@@ -21,6 +23,14 @@ export const ContributeSection: React.FC<ContributeSectionProps> = () => {
               for everyone
             </p>
           </div>
+
+          <Link
+            href="/contribute"
+            className="flex items-center gap-2 px-6 sm:px-8 lg:px-6 py-3 sm:py-4 lg:py-3 rounded-full font-medium text-white transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95 bg-purple-primary hover:opacity-90 whitespace-nowrap"
+          >
+            <span>Contribute</span>
+            <ContributeBg size={16} color="white" />
+          </Link>
         </div>
       </div>
     </section>

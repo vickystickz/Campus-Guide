@@ -25,7 +25,7 @@ export const MappingSlider: React.FC<MappingSliderProps> = ({
       {/* Slider container with counter */}
       <div className="flex items-center gap-2">
         <div className="relative flex-grow">
-          <style>{`
+          <style suppressHydrationWarning>{`
             input[type="range"].gradient-slider::-webkit-slider-thumb {
               appearance: none;
               width: 24px;
